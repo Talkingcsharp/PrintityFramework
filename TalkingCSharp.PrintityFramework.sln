@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrintityFramework", "src\TalkingCSharp.PrintityFramework\PrintityFramework.csproj", "{356F2809-AA5E-4061-8938-5A02310EBA09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{356F2809-AA5E-4061-8938-5A02310EBA09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356F2809-AA5E-4061-8938-5A02310EBA09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356F2809-AA5E-4061-8938-5A02310EBA09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356F2809-AA5E-4061-8938-5A02310EBA09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5640866B-6E79-4E6A-844A-3C742A1D88DB}
+	EndGlobalSection
+EndGlobal
