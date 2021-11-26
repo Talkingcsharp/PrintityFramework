@@ -6,7 +6,6 @@ This framework is intended to provide an easy-to-design printing documents with 
 
 # Dependency
 This framework depends on
-- iTextSharp-LGPL nuget package
 - System.Drawing.Common assembly
 
 # Nuget package url
