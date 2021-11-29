@@ -5,7 +5,7 @@ public class PFW_Column
     public string? PropertyName { get; set; }
     public string? DisplayValue { get; set; }
     public float Width { get; set; }
-    public PFW_MeasurementsEnum WidthUnit { get; set; } = PFW_MeasurementsEnum.Px;
+    public PFW_MeasurementsEnum WidthUnit { get; set; } = PFW_MeasurementsEnum.Dot;
     public PFW_Font? HeaderFont { get; set; }
     public PFW_Font? Font { get; set; }
     public PFW_Font? AlternatingFont { get; set; }

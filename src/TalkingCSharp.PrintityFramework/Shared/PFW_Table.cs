@@ -6,16 +6,16 @@ public class PFW_Table
 {
     public ICollection<PFW_Column> Columns { get; set; } = new List<PFW_Column>();
     public float RowHeaderHeight { get; set; } = 50;
-    public PFW_MeasurementsEnum RowHeaderHeightUnit { get; set; } = PFW_MeasurementsEnum.Px;
+    public PFW_MeasurementsEnum RowHeaderHeightUnit { get; set; } = PFW_MeasurementsEnum.Dot;
     public float RowHeight { get; set; } = 40;
-    public PFW_MeasurementsEnum RowHeightUnit { get; set; } = PFW_MeasurementsEnum.Px;
+    public PFW_MeasurementsEnum RowHeightUnit { get; set; } = PFW_MeasurementsEnum.Dot;
     public SizeF Size { get; set; }
-    public PFW_MeasurementsEnum SizeUnit { get; set; } = PFW_MeasurementsEnum.Px;
+    public PFW_MeasurementsEnum SizeUnit { get; set; } = PFW_MeasurementsEnum.Dot;
     public ICollection<object> Data { get; set; } = new List<object>();
     public float StartX { get; set; } = 5;
     public PFW_MeasurementsEnum StartXUnit { get; set; } = PFW_MeasurementsEnum.Percent;
     public float StartY { get; set; } = 200;
-    public PFW_MeasurementsEnum StartYUnit { get; set; } = PFW_MeasurementsEnum.Px;
+    public PFW_MeasurementsEnum StartYUnit { get; set; } = PFW_MeasurementsEnum.Dot;
     public PFW_Table AddColumn(PFW_Column column)
     {
         this.Columns.Add(column);
@@ -61,5 +61,7 @@ public class PFW_Table
         this.StartYUnit = unit;
         return this;
     }
+
+    
 }
 

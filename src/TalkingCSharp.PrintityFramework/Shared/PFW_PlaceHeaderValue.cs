@@ -5,9 +5,9 @@ namespace PrintityFramework.Shared;
 public class PFW_PlaceHeaderValue
 {
     public RectangleF Bounds { get; set; }
-    public PFW_MeasurementsEnum BoundsUnit { get; set; } = PFW_MeasurementsEnum.Px;
+    public PFW_MeasurementsEnum BoundsUnit { get; set; } = PFW_MeasurementsEnum.Dot;
     public RectangleF HeaderBounds { get; set; }
-    public PFW_MeasurementsEnum HeaderBoundsUnit { get; set; } = PFW_MeasurementsEnum.Px;
+    public PFW_MeasurementsEnum HeaderBoundsUnit { get; set; } = PFW_MeasurementsEnum.Dot;
     public string? Header { get; set; }
     public string? Text { get; set; }
     public PFW_Font? Font { get; set; }
