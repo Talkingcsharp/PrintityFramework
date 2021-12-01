@@ -1,16 +1,18 @@
 ﻿using PdfSharpCore.Drawing;
+using PdfSharpCore.Drawing.Layout;
 using PdfSharpCore.Pdf;
+using PrintityFramework.Shared.Core;
 using System.Drawing;
 namespace PrintityFramework.Shared;
 
-public class PFW_PlaceLabel
+public class PFW_PlaceLabel : IPFW_BoundsObject
 {
     public RectangleF Bounds { get; set; }
     public PFW_MeasurementsEnum BoundsUnit { get; set; } = PFW_MeasurementsEnum.Dot;
     public string? Text { get; set; }
     public PFW_Font? Font { get; set; }
     public PFW_HorizontalAlignment HAlign { get; set; } = PFW_HorizontalAlignment.Center;
-    public PFW_VerticalAlignment VAlien { get; set; } = PFW_VerticalAlignment.Middle;
+    public PFW_VerticalAlignment VAlign { get; set; } = PFW_VerticalAlignment.Middle;
     public PFW_PlaceLabel SetBounds(RectangleF bounds, PFW_MeasurementsEnum unit)
     {
         this.Bounds = bounds;
@@ -36,54 +38,40 @@ public class PFW_PlaceLabel
     }
     public PFW_PlaceLabel SetVAlign(PFW_VerticalAlignment align)
     {
-        this.VAlien = align;
+        this.VAlign = align;
         return this;
     }
 
-    public void Draw(XGraphics graphic,PdfPage page)
+    public void Draw(XGraphics graphic, PdfPage page)
     {
-        XRect bounds = new XRect
-        {
-            X = PFW_Helper.LocationHelperX(Bounds.X, BoundsUnit, page),
-            Y = PFW_Helper.LocationHelperY(Bounds.Y, BoundsUnit, page),
-            Height = PFW_Helper.SizeHelper(Bounds.Size, BoundsUnit, page).Height,
-            Width = PFW_Helper.SizeHelper(Bounds.Size, BoundsUnit, page).Width
-        };
+        DrawRectangle(graphic, page);
+        DrawText(graphic, page);
+    }
 
-        graphic.DrawRectangle(XPens.Black, bounds);
+    private void DrawRectangle(XGraphics graphic, PdfPage page)
+    {
+        graphic.DrawRectangle(Font?.GetXPen(), PFW_Helper.GetBounds(this, page));
+    }
 
-        var measure = graphic.MeasureString(Text, new XFont(Font?.FontName, Font?.Size ?? 0, XFontStyle.Regular));
-        XPoint textLocation = new XPoint();
-        if(HAlign == PFW_HorizontalAlignment.Left)
-        {
-            textLocation.X = bounds.X;
-        }
-        if(HAlign == PFW_HorizontalAlignment.Center)
-        {
-            textLocation.X = bounds.X + ((bounds.Width - measure.Width) / 2);
-        }
-        if(HAlign == PFW_HorizontalAlignment.Right)
-        {
-            textLocation.X = bounds.X + bounds.Width - measure.Width;
-        }
+    private void DrawText(XGraphics graphic, PdfPage page)
+    {
+        XTextFormatter formatter = new XTextFormatter(graphic);
+        //formatter.LayoutRectangle = PFW_Helper.GetBounds(this, page);
+        //formatter.Text = Text;
+        //formatter.Font = Font?.GetXFont();
+        //formatter.Alignment = XParagraphAlignment.Center;
+        formatter.DrawString(Text,
+            Font?.GetXFont(),
+            Font?.GetXBrush(),
+            PFW_Helper.GetBounds(this, page),
+            XStringFormats.TopLeft);
 
-        if(VAlien == PFW_VerticalAlignment.Top)
-        {
-            textLocation.Y = bounds.Y + measure.Height;
-        }
 
-        if(VAlien == PFW_VerticalAlignment.Middle)
-        {
-            textLocation.Y = bounds.Y + (bounds.Height / 2) + (measure.Height / 2);
-        }
-        if(VAlien == PFW_VerticalAlignment.Bottom)
-        {
-            textLocation.Y = bounds.Y + bounds.Height;
-        }
-        graphic.DrawString(Text,
-            new XFont(Font?.FontName, Font?.Size ?? 0, XFontStyle.Regular),
-            XBrushes.Black,
-            textLocation);
+        //graphic.DrawString(Text,
+        //    Font?.GetXFont(),
+        //    Font?.GetXBrush(),
+        //    PFW_Helper.GetBounds(this, page),
+        //    PFW_Helper.GetStringFormat(HAlign, VAlign));
     }
 }
 

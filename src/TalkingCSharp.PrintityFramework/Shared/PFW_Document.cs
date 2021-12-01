@@ -52,10 +52,21 @@ public class PFW_Document
         return this;
     }
 
+    public SizeF GetSize()
+    {
+        return new SizeF
+        {
+            Height = (float)new XUnit(_Size.Height, XGraphicsUnit.Millimeter).Value,
+            Width = (float)new XUnit(_Size.Width, XGraphicsUnit.Millimeter).Value
+        };
+    }
+
     public Stream CreateDocument()
     {
         PdfSharpCore.Pdf.PdfDocument document = new PdfSharpCore.Pdf.PdfDocument();
         var page = document.AddPage();
+        page.Height = new XUnit(_Size.Height, XGraphicsUnit.Millimeter);
+        page.Width = new XUnit(_Size.Width, XGraphicsUnit.Millimeter);
         var graphic = XGraphics.FromPdfPage(page);
 
         foreach(var item in Labels)

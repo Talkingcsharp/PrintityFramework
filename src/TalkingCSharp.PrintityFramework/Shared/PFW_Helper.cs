@@ -1,5 +1,7 @@
 ﻿using PdfSharpCore.Drawing;
+using PdfSharpCore.Drawing.Layout;
 using PdfSharpCore.Pdf;
+using PrintityFramework.Shared.Core;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -64,6 +66,82 @@ namespace PrintityFramework.Shared
             output.Height = (float)pdfUnit.Millimeter;
 
             return output;
+        }
+
+        public static XRect GetBounds(IPFW_BoundsObject source, PdfPage page)
+        {
+            return new XRect
+            {
+                X = PFW_Helper.LocationHelperX(source.Bounds.X, source.BoundsUnit, page),
+                Y = PFW_Helper.LocationHelperY(source.Bounds.Y, source.BoundsUnit, page),
+                Height = PFW_Helper.SizeHelper(source.Bounds.Size, source.BoundsUnit, page).Height,
+                Width = PFW_Helper.SizeHelper(source.Bounds.Size, source.BoundsUnit, page).Width
+            };
+        }
+        public static XTextFormatter GetTextFormatter(XGraphics graphics,PFW_HorizontalAlignment hAlign, PFW_VerticalAlignment vAlign)
+        {
+            var output = new XTextFormatter(graphics);
+            if(hAlign == PFW_HorizontalAlignment.Left)
+            {
+                output.Alignment = XParagraphAlignment.Left;
+            }
+
+            if (hAlign == PFW_HorizontalAlignment.Center)
+            {
+                output.Alignment = XParagraphAlignment.Center;
+            }
+
+            if (hAlign == PFW_HorizontalAlignment.Right)
+            {
+                output.Alignment = XParagraphAlignment.Right;
+            }
+            return output;
+        }
+        public static XStringFormat GetStringFormat(PFW_HorizontalAlignment hAlign,PFW_VerticalAlignment vAligm)
+        {
+            if(hAlign == PFW_HorizontalAlignment.Left && vAligm == PFW_VerticalAlignment.Top)
+            {
+                return XStringFormats.TopLeft;
+            }
+            if(hAlign == PFW_HorizontalAlignment.Center && vAligm == PFW_VerticalAlignment.Top)
+            {
+                return XStringFormats.TopCenter;
+            }
+
+            if(hAlign == PFW_HorizontalAlignment.Right && vAligm == PFW_VerticalAlignment.Top)
+            {
+                return XStringFormats.TopRight;
+            }
+
+            if (hAlign == PFW_HorizontalAlignment.Left && vAligm == PFW_VerticalAlignment.Middle)
+            {
+                return XStringFormats.CenterLeft;
+            }
+            if (hAlign == PFW_HorizontalAlignment.Center && vAligm == PFW_VerticalAlignment.Middle)
+            {
+                return XStringFormats.Center;
+            }
+
+            if (hAlign == PFW_HorizontalAlignment.Right && vAligm == PFW_VerticalAlignment.Middle)
+            {
+                return XStringFormats.CenterRight;
+            }
+
+            if (hAlign == PFW_HorizontalAlignment.Left && vAligm == PFW_VerticalAlignment.Bottom)
+            {
+                return XStringFormats.BottomLeft;
+            }
+            if (hAlign == PFW_HorizontalAlignment.Center && vAligm == PFW_VerticalAlignment.Bottom)
+            {
+                return XStringFormats.BottomCenter;
+            }
+
+            if (hAlign == PFW_HorizontalAlignment.Right && vAligm == PFW_VerticalAlignment.Bottom)
+            {
+                return XStringFormats.BottomRight;
+            }
+
+            throw new ArgumentException();
         }
     }
 }

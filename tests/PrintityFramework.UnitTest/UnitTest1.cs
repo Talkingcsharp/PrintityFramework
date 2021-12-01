@@ -14,10 +14,11 @@ namespace PrintityFramework.UnitTest
                 .AddLabel(new PFW_PlaceLabel()
                 .SetHAlign(PFW_HorizontalAlignment.Center)
                 .SetVAlign(PFW_VerticalAlignment.Middle)
-                .SetText("Test")
+                .SetText("Test very big test to test but out of bounds")
                 .SetFont(new PFW_Font()
                     .SetSize(20)
-                    .SetFontName("Arial"))
+                    .SetFontName("Arial")
+                    .SetColor(Color.Black))
                 .SetBounds(new RectangleF
                 {
                     X = 50,
@@ -31,7 +32,8 @@ namespace PrintityFramework.UnitTest
                 .SetText("Left top")
                 .SetFont(new PFW_Font()
                     .SetSize(20)
-                    .SetFontName("Arial"))
+                    .SetFontName("Arial")
+                    .SetColor(Color.Red))
                 .SetBounds(new RectangleF
                 {
                     X = 50,
@@ -45,7 +47,8 @@ namespace PrintityFramework.UnitTest
                 .SetText("Right bottom")
                 .SetFont(new PFW_Font()
                     .SetSize(20)
-                    .SetFontName("Arial"))
+                    .SetFontName("Arial")
+                    .SetColor(Color.Blue))
                 .SetBounds(new RectangleF
                 {
                     X = 50,

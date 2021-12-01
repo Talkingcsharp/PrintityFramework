@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using PdfSharpCore.Drawing;
+using System.Drawing;
 
 namespace PrintityFramework.Shared;
 
@@ -44,6 +45,44 @@ public class PFW_Font
     {
         this.Color = color;
         return this;
+    }
+
+    public XFont GetXFont()
+    {
+        XFontStyle style;
+        if (Bold && Italic)
+        {
+            style = XFontStyle.BoldItalic;
+        }
+        else if (Bold)
+        {
+            style = XFontStyle.Bold;
+        } 
+        else if (Italic)
+        {
+            style = XFontStyle.Italic;
+        }
+        else
+        {
+            style = XFontStyle.Regular;
+        }
+        var output = new XFont(FontName, Size,style);
+        return output;
+    }
+    public XBrush GetXBrush()
+    {
+        XBrush output = new XSolidBrush(XColor.FromArgb(Color.ToArgb()));
+        return output;
+    }
+
+    public XPen GetXPen()
+    {
+        return new XPen(XColor.FromArgb(Color.ToArgb()));
+    }
+
+    public XSize MeasureStringSize(string text, XGraphics graphics)
+    {
+        return graphics.MeasureString(text, GetXFont());
     }
 }
 
