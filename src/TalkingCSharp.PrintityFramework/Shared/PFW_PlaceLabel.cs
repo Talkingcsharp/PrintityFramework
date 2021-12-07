@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Drawing;
 namespace PrintityFramework.Shared;
 
-public class PFW_PlaceLabel : IPFW_BoundsObject
+public class PFW_PlaceLabel : IPFW_BoundsObject , IPFW_DrawableObject
 {
     public RectangleF Bounds { get; set; }
     public PFW_MeasurementsEnum BoundsUnit { get; set; } = PFW_MeasurementsEnum.Dot;

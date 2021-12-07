@@ -100,6 +100,11 @@ public class PFW_Document
         {
             item.Draw(graphic, page);
         }
+
+        foreach(var item in PlaceHeaderValues)
+        {
+            item.Draw(graphic, page);
+        }
         document.Save(fileName);
     }
 }
