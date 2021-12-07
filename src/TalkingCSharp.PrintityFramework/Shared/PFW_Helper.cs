@@ -107,21 +107,21 @@ namespace PrintityFramework.Shared
                         case PFW_VerticalAlignment.Top: return XStringFormats.TopLeft;
                         case PFW_VerticalAlignment.Middle: return XStringFormats.CenterLeft;
                         default: return XStringFormats.BottomLeft;
-                    };
+                    }
                 case (PFW_HorizontalAlignment.Center):
                     switch (vAligm)
                     {
                         case PFW_VerticalAlignment.Top: return XStringFormats.TopCenter;
                         case PFW_VerticalAlignment.Middle: return XStringFormats.Center;
                         default: return XStringFormats.BottomCenter;
-                    };
+                    }
                 case (PFW_HorizontalAlignment.Right):
                     switch (vAligm)
                     {
                         case PFW_VerticalAlignment.Top: return XStringFormats.TopRight;
                         case PFW_VerticalAlignment.Middle: return XStringFormats.CenterRight;
                         default: return XStringFormats.BottomRight;
-                    };
+                    }
                 default:
                     return XStringFormats.Center;
             }
