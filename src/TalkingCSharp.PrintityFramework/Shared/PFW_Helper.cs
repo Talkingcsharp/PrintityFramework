@@ -143,5 +143,20 @@ namespace PrintityFramework.Shared
 
             throw new ArgumentException();
         }
+
+        public static XParagraphAlignment GetParagraphAlign(PFW_HorizontalAlignment hAlign)
+        {
+            if(hAlign == PFW_HorizontalAlignment.Left)
+            {
+                return XParagraphAlignment.Left;
+            }
+
+            if(hAlign == PFW_HorizontalAlignment.Right)
+            {
+                return XParagraphAlignment.Right;
+            }
+
+            return XParagraphAlignment.Center;
+        }
     }
 }
