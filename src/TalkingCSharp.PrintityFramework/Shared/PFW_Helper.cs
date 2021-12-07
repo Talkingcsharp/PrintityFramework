@@ -99,49 +99,32 @@ namespace PrintityFramework.Shared
         }
         public static XStringFormat GetStringFormat(PFW_HorizontalAlignment hAlign,PFW_VerticalAlignment vAligm)
         {
-            if(hAlign == PFW_HorizontalAlignment.Left && vAligm == PFW_VerticalAlignment.Top)
+            switch (hAlign)
             {
-                return XStringFormats.TopLeft;
+                case (PFW_HorizontalAlignment.Left):
+                    switch (vAligm)
+                    {
+                        case PFW_VerticalAlignment.Top: return XStringFormats.TopLeft;
+                        case PFW_VerticalAlignment.Middle: return XStringFormats.CenterLeft;
+                        default: return XStringFormats.BottomLeft;
+                    }
+                case (PFW_HorizontalAlignment.Center):
+                    switch (vAligm)
+                    {
+                        case PFW_VerticalAlignment.Top: return XStringFormats.TopCenter;
+                        case PFW_VerticalAlignment.Middle: return XStringFormats.Center;
+                        default: return XStringFormats.BottomCenter;
+                    }
+                case (PFW_HorizontalAlignment.Right):
+                    switch (vAligm)
+                    {
+                        case PFW_VerticalAlignment.Top: return XStringFormats.TopRight;
+                        case PFW_VerticalAlignment.Middle: return XStringFormats.CenterRight;
+                        default: return XStringFormats.BottomRight;
+                    }
+                default:
+                    return XStringFormats.Center;
             }
-            if(hAlign == PFW_HorizontalAlignment.Center && vAligm == PFW_VerticalAlignment.Top)
-            {
-                return XStringFormats.TopCenter;
-            }
-
-            if(hAlign == PFW_HorizontalAlignment.Right && vAligm == PFW_VerticalAlignment.Top)
-            {
-                return XStringFormats.TopRight;
-            }
-
-            if (hAlign == PFW_HorizontalAlignment.Left && vAligm == PFW_VerticalAlignment.Middle)
-            {
-                return XStringFormats.CenterLeft;
-            }
-            if (hAlign == PFW_HorizontalAlignment.Center && vAligm == PFW_VerticalAlignment.Middle)
-            {
-                return XStringFormats.Center;
-            }
-
-            if (hAlign == PFW_HorizontalAlignment.Right && vAligm == PFW_VerticalAlignment.Middle)
-            {
-                return XStringFormats.CenterRight;
-            }
-
-            if (hAlign == PFW_HorizontalAlignment.Left && vAligm == PFW_VerticalAlignment.Bottom)
-            {
-                return XStringFormats.BottomLeft;
-            }
-            if (hAlign == PFW_HorizontalAlignment.Center && vAligm == PFW_VerticalAlignment.Bottom)
-            {
-                return XStringFormats.BottomCenter;
-            }
-
-            if (hAlign == PFW_HorizontalAlignment.Right && vAligm == PFW_VerticalAlignment.Bottom)
-            {
-                return XStringFormats.BottomRight;
-            }
-
-            throw new ArgumentException();
         }
 
         public static XParagraphAlignment GetParagraphAlign(PFW_HorizontalAlignment hAlign)
