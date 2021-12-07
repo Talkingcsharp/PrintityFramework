@@ -78,6 +78,17 @@ namespace PrintityFramework.Shared
                 Width = PFW_Helper.SizeHelper(source.Bounds.Size, source.BoundsUnit, page).Width
             };
         }
+
+        public static XRect GetHeaderBounds(IPFW_HeaderBoundsObject source, PdfPage page)
+        {
+            return new XRect
+            {
+                X = PFW_Helper.LocationHelperX(source.HeaderBounds.X, source.HeaderBoundsUnit, page),
+                Y = PFW_Helper.LocationHelperY(source.HeaderBounds.Y, source.HeaderBoundsUnit, page),
+                Height = PFW_Helper.SizeHelper(source.HeaderBounds.Size, source.HeaderBoundsUnit, page).Height,
+                Width = PFW_Helper.SizeHelper(source.HeaderBounds.Size, source.HeaderBoundsUnit, page).Width
+            };
+        }
         public static XTextFormatter GetTextFormatter(XGraphics graphics,PFW_HorizontalAlignment hAlign, PFW_VerticalAlignment vAlign)
         {
             var output = new XTextFormatter(graphics);

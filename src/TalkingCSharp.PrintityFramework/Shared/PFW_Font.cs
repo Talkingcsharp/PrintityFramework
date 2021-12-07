@@ -49,24 +49,30 @@ public class PFW_Font
 
     public XFont GetXFont()
     {
-        XFontStyle style;
-        if (Bold && Italic)
+        List<XFontStyle> styles = new List<XFontStyle>();
+        if (Bold)
         {
-            style = XFontStyle.BoldItalic;
+            styles.Add(XFontStyle.Bold);
         }
-        else if (Bold)
+        if (Italic)
         {
-            style = XFontStyle.Bold;
-        } 
-        else if (Italic)
-        {
-            style = XFontStyle.Italic;
+            styles.Add(XFontStyle.Italic);
         }
-        else
+        if (Underline)
         {
-            style = XFontStyle.Regular;
+            styles.Add(XFontStyle.Underline);
         }
-        var output = new XFont(FontName, Size,style);
+
+        if (styles.Count == 0)
+        {
+            return new XFont(FontName, Size, XFontStyle.Regular);
+        }
+        XFontStyle style = styles.FirstOrDefault();
+        for (int i = 1; i < styles.Count; i++)
+        {
+            style = style | styles[i];
+        }
+        var output = new XFont(FontName, Size, style);
         return output;
     }
     public XBrush GetXBrush()

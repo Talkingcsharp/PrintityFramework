@@ -1,8 +1,12 @@
-﻿using System.Drawing;
+﻿using PdfSharpCore.Drawing;
+using PdfSharpCore.Drawing.Layout;
+using PdfSharpCore.Pdf;
+using PrintityFramework.Shared.Core;
+using System.Drawing;
 
 namespace PrintityFramework.Shared;
 
-public class PFW_PlaceHeaderValue
+public class PFW_PlaceHeaderValue: IPFW_HeaderBoundsObject, IPFW_DrawableObject
 {
     public RectangleF Bounds { get; set; }
     public PFW_MeasurementsEnum BoundsUnit { get; set; } = PFW_MeasurementsEnum.Dot;
@@ -71,6 +75,45 @@ public class PFW_PlaceHeaderValue
     {
         this.VAlien = align;
         return this;
+    }
+
+    public void Draw(XGraphics graphic, PdfPage page)
+    {
+        DrawHeaderBorders(graphic, page);
+        DrawHeaderText(graphic, page);
+        DrawBorders(graphic, page);
+        DrawText(graphic, page);
+    }
+
+    private void DrawBorders(XGraphics graphic, PdfPage page)
+    {
+        graphic.DrawRectangle(Font?.GetXPen(), PFW_Helper.GetBounds(this, page));
+    }
+
+    private void DrawText(XGraphics graphic, PdfPage page)
+    {
+        XTextFormatter formatter = new XTextFormatter(graphic);
+        formatter.Alignment = PFW_Helper.GetParagraphAlign(HAlign);
+        formatter.DrawString(Text,
+            Font?.GetXFont(),
+            Font?.GetXBrush(),
+            PFW_Helper.GetBounds(this, page),
+            XStringFormats.TopLeft);
+    }
+
+    private void DrawHeaderBorders(XGraphics graphic,PdfPage page)
+    {
+        graphic.DrawRectangle(HeaderFont?.GetXPen(), PFW_Helper.GetHeaderBounds(this, page));
+    }
+    private void DrawHeaderText(XGraphics graphic,PdfPage page)
+    {
+        XTextFormatter formatter = new XTextFormatter(graphic);
+        formatter.Alignment = PFW_Helper.GetParagraphAlign(HeaderHAlign);
+        formatter.DrawString(Header,
+            HeaderFont?.GetXFont(),
+            HeaderFont?.GetXBrush(),
+            PFW_Helper.GetHeaderBounds(this, page),
+            XStringFormats.TopLeft);
     }
 }
 

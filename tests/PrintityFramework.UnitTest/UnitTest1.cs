@@ -53,7 +53,23 @@ namespace PrintityFramework.UnitTest
                     Height = 500,
                     Width = 500
                 }, PFW_MeasurementsEnum.Dot))
-                ;
+                .AddHeaderValue(new PFW_PlaceHeaderValue()
+                    .SetBounds(new RectangleF(600,350,500,150), PFW_MeasurementsEnum.Dot)
+                    .SetFont(new PFW_Font()
+                        .SetSize(20)
+                        .SetFontName("Tahome")
+                        .SetColor(Color.Red)
+                        .SetUderline(true))
+                    .SetHAlign(PFW_HorizontalAlignment.Center)
+                    .SetText("text value")
+                    .SetHeader("header Value")
+                    .SetHeaderBounds(new RectangleF(600,200,500,150), PFW_MeasurementsEnum.Dot)
+                    .SetHeaderFont(new PFW_Font()
+                        .SetBold(true)
+                        .SetColor(Color.DarkOliveGreen)
+                        .SetFontName("Arial")
+                        .SetSize(30))
+                    .SetHeaderHAlign(PFW_HorizontalAlignment.Right));
 
             doc.CreateDocument("myfile.pdf");
             Assert.True(File.Exists("myfile.pdf"));
