@@ -1,22 +1,21 @@
-﻿using System.Drawing;
+﻿using PdfSharpCore.Drawing;
+using PdfSharpCore.Pdf;
+using PrintityFramework.Shared.Core;
+using System.Drawing;
 
 namespace PrintityFramework.Shared;
 
-public class PFW_Table
+public class PFW_Table : IPFW_DrawableObject
 {
-    public ICollection<PFW_Column> Columns { get; set; } = new List<PFW_Column>();
+    public ICollection<PFW_TableColumn> Columns { get; set; } = new List<PFW_TableColumn>();
     public float RowHeaderHeight { get; set; } = 50;
     public PFW_MeasurementsEnum RowHeaderHeightUnit { get; set; } = PFW_MeasurementsEnum.Dot;
     public float RowHeight { get; set; } = 40;
     public PFW_MeasurementsEnum RowHeightUnit { get; set; } = PFW_MeasurementsEnum.Dot;
-    public SizeF Size { get; set; }
-    public PFW_MeasurementsEnum SizeUnit { get; set; } = PFW_MeasurementsEnum.Dot;
-    public ICollection<object> Data { get; set; } = new List<object>();
-    public float StartX { get; set; } = 5;
-    public PFW_MeasurementsEnum StartXUnit { get; set; } = PFW_MeasurementsEnum.Percent;
-    public float StartY { get; set; } = 200;
-    public PFW_MeasurementsEnum StartYUnit { get; set; } = PFW_MeasurementsEnum.Dot;
-    public PFW_Table AddColumn(PFW_Column column)
+    public RectangleF Bounds { get; set; }
+    public PFW_MeasurementsEnum BoundsUnit { get; set; }
+    public ICollection<object>? Data { get; set; }
+    public PFW_Table AddColumn(PFW_TableColumn column)
     {
         this.Columns.Add(column);
         return this;
@@ -35,10 +34,10 @@ public class PFW_Table
         return this;
     }
 
-    public PFW_Table SetSize(SizeF size, PFW_MeasurementsEnum unit)
+    public PFW_Table SetBounds(RectangleF bounds, PFW_MeasurementsEnum unit)
     {
-        this.Size = size;
-        this.SizeUnit = unit;
+        this.Bounds = bounds;
+        this.BoundsUnit = unit;
         return this;
     }
 
@@ -48,20 +47,11 @@ public class PFW_Table
         return this;
     }
 
-    public PFW_Table SetStartX(float x, PFW_MeasurementsEnum unit)
-    {
-        this.StartX = x;
-        this.StartYUnit = unit;
-        return this;
-    }
+   
 
-    public PFW_Table SetStartY(float y, PFW_MeasurementsEnum unit)
+    public void Draw(XGraphics graphic, PdfPage page)
     {
-        this.StartY = y;
-        this.StartYUnit = unit;
-        return this;
+        
     }
-
-    
 }
 
