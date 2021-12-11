@@ -1,7 +1,7 @@
 ﻿using PdfSharpCore.Drawing;
 using System.Drawing;
 
-namespace PrintityFramework.Shared;
+namespace PrintityFramework;
 
 public class PFW_Font
 {
