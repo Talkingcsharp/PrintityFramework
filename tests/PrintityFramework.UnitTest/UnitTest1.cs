@@ -1,4 +1,3 @@
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using PrintityFramework.Shared;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,6 @@ namespace PrintityFramework.UnitTest
         [Fact]
         public void Test1()
         {
-
             var doc = new PFW_Document()
                 .AddTable(new PFW_Table<Student>()
                     .SetBounds(new RectangleF(10, 10, 190, 200), PFW_MeasurementsEnum.Dot)
@@ -91,7 +89,6 @@ namespace PrintityFramework.UnitTest
                     .SetText("Quick Brown Foxes gives brands a voice. We provide strategic frameworks, creative power and expert guidance in communication. We work at the crossroads between what brands offer and what people need.")
                     .SetHAlign(PFW_HorizontalAlignment.Left)
                     );
-            
             doc.CreateDocument("myfile.pdf");
             Assert.True(File.Exists("myfile.pdf"));
         }
@@ -99,7 +96,7 @@ namespace PrintityFramework.UnitTest
         List<Student> PrepareList()
         {
             List<Student> output = new List<Student>();
-            for(int i=0;i< 20; i++)
+            for (int i = 0; i < 20; i++)
             {
                 output.Add(new Student
                 {
@@ -112,14 +109,14 @@ namespace PrintityFramework.UnitTest
             }
             return output;
         }
-    }
 
-    class Student
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = "";
-        public DateTime? DOB{ get; set; }
-        public long Height { get; set; }
-        public bool IsMale { get; set; }
+        class Student
+        {
+            public int Id { get; set; }
+            public string Name { get; set; } = "";
+            public DateTime? DOB { get; set; }
+            public long Height { get; set; }
+            public bool IsMale { get; set; }
+        }
     }
 }
