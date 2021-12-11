@@ -2,97 +2,88 @@
 using PdfSharpCore.Drawing.Layout;
 using PdfSharpCore.Pdf;
 using PrintityFramework.Shared.Core;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PrintityFramework.Shared
 {
-    public class PFW_Helper
+    public class PFW_MeasurementesHelper
     {
-        public static double LocationHelperX(float src,PFW_MeasurementsEnum measure,PdfPage page)
+        public static double LocationHelperX(float src, PFW_MeasurementsEnum measure, PdfPage page)
         {
             XUnit pdfUnit = new XUnit();
-            if(measure == PFW_MeasurementsEnum.Dot)
+            if (measure == PFW_MeasurementsEnum.Dot)
             {
-                pdfUnit.Point = src;
+                pdfUnit.Millimeter = src;
             }
-            if(measure == PFW_MeasurementsEnum.Percent)
+            if (measure == PFW_MeasurementsEnum.Percent)
             {
                 pdfUnit.Millimeter = src * page.Width.Millimeter / 100;
             }
-            return pdfUnit.Millimeter;
+            return pdfUnit.Point;
         }
-
         public static double LocationHelperY(float src, PFW_MeasurementsEnum measure, PdfPage page)
         {
             XUnit pdfUnit = new XUnit();
             if (measure == PFW_MeasurementsEnum.Dot)
             {
-                pdfUnit.Point = src;
+                pdfUnit.Millimeter = src;
             }
             if (measure == PFW_MeasurementsEnum.Percent)
             {
                 pdfUnit.Millimeter = src * page.Height.Millimeter / 100;
             }
-            return pdfUnit.Millimeter;
+            return pdfUnit.Point;
         }
-
         public static SizeF SizeHelper(SizeF src, PFW_MeasurementsEnum measure, PdfPage page)
         {
             XUnit pdfUnit = new XUnit();
             SizeF output = new SizeF();
             if (measure == PFW_MeasurementsEnum.Dot)
             {
-                pdfUnit.Point = src.Width;
+                pdfUnit.Millimeter = src.Width;
             }
             if (measure == PFW_MeasurementsEnum.Percent)
             {
                 pdfUnit.Millimeter = src.Width * page.Width.Millimeter / 100;
             }
-            output.Width = (float)pdfUnit.Millimeter;
+            output.Width = (float)pdfUnit.Point;
 
             if (measure == PFW_MeasurementsEnum.Dot)
             {
-                pdfUnit.Point = src.Height;
+                pdfUnit.Millimeter = src.Height;
             }
             if (measure == PFW_MeasurementsEnum.Percent)
             {
                 pdfUnit.Millimeter = src.Height * page.Height.Millimeter / 100;
             }
-            output.Height = (float)pdfUnit.Millimeter;
+            output.Height = (float)pdfUnit.Point;
 
             return output;
         }
-
         public static XRect GetBounds(IPFW_BoundsObject source, PdfPage page)
         {
             return new XRect
             {
-                X = PFW_Helper.LocationHelperX(source.Bounds.X, source.BoundsUnit, page),
-                Y = PFW_Helper.LocationHelperY(source.Bounds.Y, source.BoundsUnit, page),
-                Height = PFW_Helper.SizeHelper(source.Bounds.Size, source.BoundsUnit, page).Height,
-                Width = PFW_Helper.SizeHelper(source.Bounds.Size, source.BoundsUnit, page).Width
+                X = PFW_MeasurementesHelper.LocationHelperX(source.Bounds.X, source.BoundsUnit, page),
+                Y = PFW_MeasurementesHelper.LocationHelperY(source.Bounds.Y, source.BoundsUnit, page),
+                Height = PFW_MeasurementesHelper.SizeHelper(source.Bounds.Size, source.BoundsUnit, page).Height,
+                Width = PFW_MeasurementesHelper.SizeHelper(source.Bounds.Size, source.BoundsUnit, page).Width
             };
         }
-
         public static XRect GetHeaderBounds(IPFW_HeaderBoundsObject source, PdfPage page)
         {
             return new XRect
             {
-                X = PFW_Helper.LocationHelperX(source.HeaderBounds.X, source.HeaderBoundsUnit, page),
-                Y = PFW_Helper.LocationHelperY(source.HeaderBounds.Y, source.HeaderBoundsUnit, page),
-                Height = PFW_Helper.SizeHelper(source.HeaderBounds.Size, source.HeaderBoundsUnit, page).Height,
-                Width = PFW_Helper.SizeHelper(source.HeaderBounds.Size, source.HeaderBoundsUnit, page).Width
+                X = PFW_MeasurementesHelper.LocationHelperX(source.HeaderBounds.X, source.HeaderBoundsUnit, page),
+                Y = PFW_MeasurementesHelper.LocationHelperY(source.HeaderBounds.Y, source.HeaderBoundsUnit, page),
+                Height = PFW_MeasurementesHelper.SizeHelper(source.HeaderBounds.Size, source.HeaderBoundsUnit, page).Height,
+                Width = PFW_MeasurementesHelper.SizeHelper(source.HeaderBounds.Size, source.HeaderBoundsUnit, page).Width
             };
         }
-        public static XTextFormatter GetTextFormatter(XGraphics graphics,PFW_HorizontalAlignment hAlign, PFW_VerticalAlignment vAlign)
+        public static XTextFormatter GetTextFormatter(XGraphics graphics, PFW_HorizontalAlignment hAlign, PFW_VerticalAlignment vAlign)
         {
             var output = new XTextFormatter(graphics);
-            if(hAlign == PFW_HorizontalAlignment.Left)
+            if (hAlign == PFW_HorizontalAlignment.Left)
             {
                 output.Alignment = XParagraphAlignment.Left;
             }
@@ -108,7 +99,7 @@ namespace PrintityFramework.Shared
             }
             return output;
         }
-        public static XStringFormat GetStringFormat(PFW_HorizontalAlignment hAlign,PFW_VerticalAlignment vAligm)
+        public static XStringFormat GetStringFormat(PFW_HorizontalAlignment hAlign, PFW_VerticalAlignment vAligm)
         {
             switch (hAlign)
             {
@@ -137,20 +128,43 @@ namespace PrintityFramework.Shared
                     return XStringFormats.Center;
             }
         }
-
         public static XParagraphAlignment GetParagraphAlign(PFW_HorizontalAlignment hAlign)
         {
-            if(hAlign == PFW_HorizontalAlignment.Left)
+            if (hAlign == PFW_HorizontalAlignment.Left)
             {
                 return XParagraphAlignment.Left;
             }
 
-            if(hAlign == PFW_HorizontalAlignment.Right)
+            if (hAlign == PFW_HorizontalAlignment.Right)
             {
                 return XParagraphAlignment.Right;
             }
 
             return XParagraphAlignment.Center;
+        }
+        public static XRect GetTableColumnBounds<DataType>(XPoint startLocation, PdfPage page, PFW_Table<DataType> table, PFW_TableColumn column)
+        {
+            XRect parentBounds = GetBounds(table, page);
+            float columnWidth = (column.WidthUnit == PFW_MeasurementsEnum.Dot) ? column.Width : (column.Width / (float)parentBounds.Width) * 100;
+            return new XRect
+            {
+                X = startLocation.X,
+                Y = startLocation.Y,
+                Height = XUnit.FromMillimeter(table.RowHeight).Point,
+                Width = XUnit.FromMillimeter(columnWidth).Point
+            };
+        }
+        public static XRect GetTableHeaderColumnBounds<DataType>(XPoint startLocation, PdfPage page, PFW_Table<DataType> table, PFW_TableColumn column)
+        {
+            XRect parentBounds = GetBounds(table, page);
+            float columnWidth = (column.WidthUnit == PFW_MeasurementsEnum.Dot) ? column.Width : (column.Width / (float)parentBounds.Width) * 100;
+            return new XRect
+            {
+                X = startLocation.X,
+                Y = startLocation.Y,
+                Height = XUnit.FromMillimeter(table.RowHeaderHeight).Point,
+                Width = XUnit.FromMillimeter(columnWidth).Point
+            };
         }
     }
 }

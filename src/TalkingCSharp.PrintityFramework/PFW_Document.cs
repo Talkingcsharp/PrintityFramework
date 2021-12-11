@@ -1,7 +1,9 @@
 ﻿using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf;
+using PrintityFramework.Shared;
+using PrintityFramework.Shared.Core;
 using System.Drawing;
-namespace PrintityFramework.Shared;
+namespace PrintityFramework;
 
 public class PFW_Document
 {
@@ -30,11 +32,11 @@ public class PFW_Document
         }
         set{}
     }
-    public List<PFW_Table> Tables { get; set; } = new List<PFW_Table>();
+    public List<IPFW_DrawableTable> Tables { get; set; } = new List<IPFW_DrawableTable>();
     public List<PFW_PlaceLabel> Labels { get; set; } = new List<PFW_PlaceLabel>();
     public List<PFW_PlaceHeaderValue> PlaceHeaderValues { get; set; } = new List<PFW_PlaceHeaderValue>();
 
-    public PFW_Document AddTable(PFW_Table table)
+    public PFW_Document AddTable(IPFW_DrawableTable table)
     {
         Tables.Add(table);
         return this;
@@ -71,19 +73,20 @@ public class PFW_Document
 
         foreach(var item in Labels)
         {
+            item.Draw(graphic, page);
             graphic.DrawRectangle(XPens.Black, new XRect
             {
-                X = PFW_Helper.LocationHelperX(item.Bounds.X, item.BoundsUnit, page),
-                Y = PFW_Helper.LocationHelperY(item.Bounds.Y, item.BoundsUnit, page),
-                Height = PFW_Helper.SizeHelper(item.Bounds.Size, item.BoundsUnit, page).Height,
-                Width = PFW_Helper.SizeHelper(item.Bounds.Size, item.BoundsUnit, page).Width
+                X = PFW_MeasurementesHelper.LocationHelperX(item.Bounds.X, item.BoundsUnit, page),
+                Y = PFW_MeasurementesHelper.LocationHelperY(item.Bounds.Y, item.BoundsUnit, page),
+                Height = PFW_MeasurementesHelper.SizeHelper(item.Bounds.Size, item.BoundsUnit, page).Height,
+                Width = PFW_MeasurementesHelper.SizeHelper(item.Bounds.Size, item.BoundsUnit, page).Width
             });
 
             graphic.DrawString(item.Text, 
                 new XFont(item.Font?.FontName, item.Font?.Size?? 0, XFontStyle.Regular),
                 XBrushes.Black, 
-                new XPoint(PFW_Helper.LocationHelperX(item.Bounds.X, item.BoundsUnit, page),
-                PFW_Helper.LocationHelperY(item.Bounds.Y, item.BoundsUnit, page)));
+                new XPoint(PFW_MeasurementesHelper.LocationHelperX(item.Bounds.X, item.BoundsUnit, page),
+                PFW_MeasurementesHelper.LocationHelperY(item.Bounds.Y, item.BoundsUnit, page)));
         }
         MemoryStream ms = new MemoryStream();
         document.Save(ms, true);
@@ -104,6 +107,11 @@ public class PFW_Document
         foreach(var item in PlaceHeaderValues)
         {
             item.Draw(graphic, page);
+        }
+
+        foreach(var item in Tables)
+        {
+            item.Draw(graphic, page, 0);
         }
         document.Save(fileName);
     }

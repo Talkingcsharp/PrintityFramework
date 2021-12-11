@@ -1,19 +1,19 @@
 ﻿using PdfSharpCore.Drawing;
 using PdfSharpCore.Drawing.Layout;
-using PdfSharpCore.Pdf;
+using PrintityFramework.Shared;
 using PrintityFramework.Shared.Core;
 
-namespace PrintityFramework.Shared;
+namespace PrintityFramework;
 
-public class PFW_TableColumn
+public class PFW_TableColumn : IPFW_DrawableColumn
 {
-    public string? PropertyName { get; set; }
-    public string? HeaderText { get; set; }
+    public string PropertyName { get; set; } = "";
+    public string HeaderText { get; set; } = "";
     public float Width { get; set; }
     public PFW_MeasurementsEnum WidthUnit { get; set; } = PFW_MeasurementsEnum.Dot;
-    public PFW_Font? HeaderFont { get; set; }
-    public PFW_Font? Font { get; set; }
-    public PFW_Font? AlternatingFont { get; set; }
+    public PFW_Font HeaderFont { get; set; } = PFW_Defaults.DefaultHeaderFont;
+    public PFW_Font Font { get; set; } = PFW_Defaults.DefaultFont;
+    public PFW_Font AlternatingFont { get; set; } = PFW_Defaults.DefaultFont;
     public PFW_HorizontalAlignment HeaderHAlign { get; set; } = PFW_HorizontalAlignment.Left;
     public PFW_VerticalAlignment HeaderVAlien { get; set; } = PFW_VerticalAlignment.Middle;
     public PFW_HorizontalAlignment HAlign { get; set; } = PFW_HorizontalAlignment.Center;
@@ -81,26 +81,14 @@ public class PFW_TableColumn
 
     public void Draw(XGraphics graphic, XRect bounds, string value)
     {
-        graphic.DrawRectangle(Font?.GetXPen(), bounds);
-        XTextFormatter formatter = new XTextFormatter(graphic);
-        formatter.Alignment = PFW_Helper.GetParagraphAlign(HAlign);
-        formatter.DrawString(value,
-            Font?.GetXFont(),
-            Font?.GetXBrush(),
-            bounds,
-            XStringFormats.TopLeft);
+        graphic.DrawRectangle(Font.GetXPen(), bounds);
+        PFW_TextHelper.DrawText(graphic, value, Font, bounds, true, HAlign);
     }
 
     public void DrawHeader(XGraphics graphic, XRect bounds)
     {
-        graphic.DrawRectangle(HeaderFont?.GetXPen(), bounds);
-        XTextFormatter formatter = new XTextFormatter(graphic);
-        formatter.Alignment = PFW_Helper.GetParagraphAlign(HeaderHAlign);
-        formatter.DrawString(HeaderText,
-            HeaderFont?.GetXFont(),
-            HeaderFont?.GetXBrush(),
-            bounds,
-            XStringFormats.TopLeft);
+        graphic.DrawRectangle(HeaderFont.GetXPen(), bounds);
+        PFW_TextHelper.DrawText(graphic, HeaderText, HeaderFont, bounds, true, HeaderHAlign);
     }
 
 }
