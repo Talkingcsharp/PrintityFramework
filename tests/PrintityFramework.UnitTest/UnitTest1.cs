@@ -42,7 +42,7 @@ namespace PrintityFramework.UnitTest
                         .SetPropertyName(nameof(Student.IsMale))
                         .SetWidth(10, PFW_MeasurementsEnum.Percent)))
                 .AddLabel(new PFW_PlaceLabel()
-                    .SetBounds(new RectangleF(10, 95, 50, 4), PFW_MeasurementsEnum.Percent)
+                    .SetBounds(new RectangleF(10, 85, 50, 10), PFW_MeasurementsEnum.Percent)
                     .SetFont(new PFW_Font()
                         .SetSize(8)
                         .SetColor(Color.Green))
