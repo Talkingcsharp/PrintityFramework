@@ -2,6 +2,8 @@
 using PdfSharpCore.Drawing.Layout;
 using PrintityFramework.Shared;
 using PrintityFramework.Shared.Core;
+using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace PrintityFramework;
 
@@ -18,7 +20,26 @@ public class PFW_TableColumn : IPFW_DrawableColumn
     public PFW_VerticalAlignment HeaderVAlien { get; set; } = PFW_VerticalAlignment.Middle;
     public PFW_HorizontalAlignment HAlign { get; set; } = PFW_HorizontalAlignment.Center;
     public PFW_VerticalAlignment VAlien { get; set; } = PFW_VerticalAlignment.Middle;
+    public Color BackgroundColor { get; set; } = PFW_Defaults.DefaultBackgroundColor;
+    public Color HeaderBackgroundColor { get; set; } = PFW_Defaults.DefaultHeraderBackgroundColor;
+    public Color AlternateBackgroundColor { get; set; } = PFW_Defaults.DefaultAlternatingBackgroundColor;
+    public PFW_TableColumn SetBackgroundColor(Color color)
+    {
+        this.BackgroundColor = color;
+        return this;
+    }
 
+    public PFW_TableColumn SetAlternateBackgroundColor(Color color)
+    {
+        this.AlternateBackgroundColor = color;
+        return this;
+    }
+
+    public PFW_TableColumn SetHeaderBackgroundColor(Color color)
+    {
+        this.HeaderBackgroundColor = color;
+        return this;
+    }
     public PFW_TableColumn SetPropertyName(string propertyName)
     {
         this.PropertyName = propertyName;
@@ -84,10 +105,18 @@ public class PFW_TableColumn : IPFW_DrawableColumn
         graphic.DrawRectangle(Font.GetXPen(), bounds);
         if (isAlternate)
         {
+            if (AlternateBackgroundColor != Color.Transparent)
+            {
+                graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(AlternateBackgroundColor.ToArgb())), bounds);
+            }
             PFW_TextHelper.DrawText(graphic, value, AlternatingFont, bounds, true, HAlign);
         }
         else
-        {   
+        {
+            if (BackgroundColor != Color.Transparent)
+            {
+                graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(BackgroundColor.ToArgb())), bounds);
+            }
             PFW_TextHelper.DrawText(graphic, value, Font, bounds, true, HAlign);
         }
         
@@ -95,6 +124,10 @@ public class PFW_TableColumn : IPFW_DrawableColumn
 
     public void DrawHeader(XGraphics graphic, XRect bounds)
     {
+        if(HeaderBackgroundColor != Color.Transparent)
+        {
+            graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(HeaderBackgroundColor.ToArgb())), bounds);
+        }
         graphic.DrawRectangle(HeaderFont.GetXPen(), bounds);
         PFW_TextHelper.DrawText(graphic, HeaderText, HeaderFont, bounds, true, HeaderHAlign);
     }
