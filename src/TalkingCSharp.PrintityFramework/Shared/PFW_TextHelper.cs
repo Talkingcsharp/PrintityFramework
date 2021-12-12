@@ -23,7 +23,7 @@ public class PFW_TextHelper
         class TextBlock
         {
             public string Text { get; set; } = "";
-            public int StartINdex { get; set; }
+            public int StartIndex { get; set; }
             public int Length { get; set; }
         }
 
@@ -43,6 +43,11 @@ public class PFW_TextHelper
             float lineHeight = (float)Graphics.MeasureString(Text, Font.GetXFont()).Height;
             float lineSpacing = 2;
             lineHeight = lineHeight + lineSpacing;
+            float minWidth = (float)Graphics.MeasureString("  -", Font.GetXFont()).Width;
+            if(Bounds.Height < lineHeight || Bounds.Width < minWidth)
+            {
+                throw new ArgumentException("Invalid mueasurements");
+            }
             int lineCount = (int)Math.Floor(Bounds.Height / lineHeight);
             CreateBlocks(lineCount);
             float currentY = (float)Bounds.Y + lineSpacing;
@@ -66,7 +71,7 @@ public class PFW_TextHelper
             {
                 TextBlock block = GetNextBlock(startIndex);
                 Blocks.Add(block);
-                startIndex = block.StartINdex + block.Length;
+                startIndex = block.StartIndex + block.Length;
             }
 
             var lastBlock = Blocks.LastOrDefault();
@@ -74,7 +79,7 @@ public class PFW_TextHelper
             {
                 return;
             }
-            if (lastBlock.StartINdex + lastBlock.Length < Text.Length)
+            if (lastBlock.StartIndex + lastBlock.Length < Text.Length)
             {
                 lastBlock.Text = lastBlock.Text.Substring(0, lastBlock.Text.Length - 4) + " ...";
             }
@@ -102,13 +107,13 @@ public class PFW_TextHelper
                         }
                     }
                     output.Text = currentText;
-                    output.StartINdex = startIndex;
+                    output.StartIndex = startIndex;
                     output.Length = currentText.Length - 1;
                     return output;
                 }
             }
             output.Text = Text.Substring(startIndex);
-            output.StartINdex = startIndex;
+            output.StartIndex = startIndex;
             output.Length = output.Text.Length;
             return output;
         }

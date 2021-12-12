@@ -44,7 +44,7 @@ namespace PrintityFramework.Shared
             }
             if (measure == PFW_MeasurementsEnum.Percent)
             {
-                pdfUnit.Millimeter = src.Width * page.Width.Millimeter / 100;
+                pdfUnit.Millimeter = src.Width / 100 * page.Width.Millimeter;
             }
             output.Width = (float)pdfUnit.Point;
 
@@ -54,7 +54,7 @@ namespace PrintityFramework.Shared
             }
             if (measure == PFW_MeasurementsEnum.Percent)
             {
-                pdfUnit.Millimeter = src.Height * page.Height.Millimeter / 100;
+                pdfUnit.Millimeter = src.Height / 100 * page.Height.Millimeter;
             }
             output.Height = (float)pdfUnit.Point;
 
@@ -145,25 +145,41 @@ namespace PrintityFramework.Shared
         public static XRect GetTableColumnBounds<DataType>(XPoint startLocation, PdfPage page, PFW_Table<DataType> table, PFW_TableColumn column)
         {
             XRect parentBounds = GetBounds(table, page);
-            float columnWidth = (column.WidthUnit == PFW_MeasurementsEnum.Dot) ? column.Width : (column.Width / (float)parentBounds.Width) * 100;
+            float columnWidth;
+            if(column.WidthUnit == PFW_MeasurementsEnum.Dot)
+            {
+                columnWidth = (float)XUnit.FromMillimeter(column.Width).Point;
+            }
+            else
+            {
+                columnWidth = (float) (column.Width / 100 * parentBounds.Width);
+            }
             return new XRect
             {
                 X = startLocation.X,
                 Y = startLocation.Y,
                 Height = XUnit.FromMillimeter(table.RowHeight).Point,
-                Width = XUnit.FromMillimeter(columnWidth).Point
+                Width = columnWidth
             };
         }
         public static XRect GetTableHeaderColumnBounds<DataType>(XPoint startLocation, PdfPage page, PFW_Table<DataType> table, PFW_TableColumn column)
         {
             XRect parentBounds = GetBounds(table, page);
-            float columnWidth = (column.WidthUnit == PFW_MeasurementsEnum.Dot) ? column.Width : (column.Width / (float)parentBounds.Width) * 100;
+            float columnWidth;
+            if (column.WidthUnit == PFW_MeasurementsEnum.Dot)
+            {
+                columnWidth = (float)XUnit.FromMillimeter(column.Width).Point;
+            }
+            else
+            {
+                columnWidth = (float)(column.Width / 100 * parentBounds.Width);
+            }
             return new XRect
             {
                 X = startLocation.X,
                 Y = startLocation.Y,
                 Height = XUnit.FromMillimeter(table.RowHeaderHeight).Point,
-                Width = XUnit.FromMillimeter(columnWidth).Point
+                Width = columnWidth
             };
         }
     }

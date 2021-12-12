@@ -47,11 +47,10 @@ public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
     public int Draw(XGraphics graphic, PdfPage page, int startingRowCount)
     {
         XRect bounds = PFW_MeasurementesHelper.GetBounds(this, page);
-        //graphic.DrawRectangle(XBrushes.Blue, bounds);
         XPoint currentLocation = new XPoint(bounds.X, bounds.Y);
-
         var rowHeight = XUnit.FromMillimeter(RowHeight).Point;
         var rowHeaderHeight = XUnit.FromMillimeter(RowHeaderHeight).Point;
+        bool isAlternate = false;
         foreach (var item in Columns)
         {
             var columnBounds = PFW_MeasurementesHelper.GetTableHeaderColumnBounds(currentLocation, page, this, item);
@@ -68,12 +67,13 @@ public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
             foreach (var item in Columns)
             {
                 var columnBounds = PFW_MeasurementesHelper.GetTableColumnBounds(currentLocation, page, this, item);
-                item.Draw(graphic, columnBounds, Data[currentRowIndex].GetStringValue(item));
+                item.Draw(graphic, columnBounds, Data[currentRowIndex].GetStringValue(item), isAlternate);
                 currentLocation.X += columnBounds.Width;
             }
             currentLocation.X = bounds.X;
             currentLocation.Y += rowHeight;
             currentRowIndex++;
+            isAlternate = !isAlternate;
         }
 
         return currentRowIndex;
