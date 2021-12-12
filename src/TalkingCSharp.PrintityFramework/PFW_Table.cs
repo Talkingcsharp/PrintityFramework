@@ -14,6 +14,8 @@ public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
     public RectangleF Bounds { get; set; }
     public PFW_MeasurementsEnum BoundsUnit { get; set; }
     public List<object>? Data { get; set; }
+        internal int CurrentRowIndex { get; private set; }
+    public bool HasNewPages { get; private set; } = false;
     public PFW_Table<DataType> AddColumn(PFW_TableColumn column)
     {
         this.Columns.Add(column);
@@ -44,7 +46,7 @@ public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
         return this;
     }
 
-    public int Draw(XGraphics graphic, PdfPage page, int startingRowCount)
+    public void Draw(XGraphics graphic, PdfPage page)
     {
         XRect bounds = PFW_MeasurementesHelper.GetBounds(this, page);
         XPoint currentLocation = new XPoint(bounds.X, bounds.Y);
@@ -61,22 +63,20 @@ public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
         currentLocation.X = bounds.X;
         currentLocation.Y += rowHeaderHeight;
 
-        int currentRowIndex = startingRowCount;
-        while (currentLocation.Y + RowHeight < bounds.Y + bounds.Height && Data is not null && currentRowIndex < Data.Count)
+        while (currentLocation.Y + RowHeight < bounds.Y + bounds.Height && Data is not null && CurrentRowIndex < Data.Count)
         {
             foreach (var item in Columns)
             {
                 var columnBounds = PFW_MeasurementesHelper.GetTableColumnBounds(currentLocation, page, this, item);
-                item.Draw(graphic, columnBounds, Data[currentRowIndex].GetStringValue(item), isAlternate);
+                item.Draw(graphic, columnBounds, Data[CurrentRowIndex].GetStringValue(item), isAlternate);
                 currentLocation.X += columnBounds.Width;
             }
             currentLocation.X = bounds.X;
             currentLocation.Y += rowHeight;
-            currentRowIndex++;
+            CurrentRowIndex++;
             isAlternate = !isAlternate;
         }
-
-        return currentRowIndex;
+        HasNewPages = CurrentRowIndex < Data?.Count;
     }
 }
 

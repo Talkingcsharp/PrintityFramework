@@ -10,6 +10,7 @@ namespace PrintityFramework.Shared.Core
 {
     public interface IPFW_DrawableTable
     {
-        int Draw(XGraphics graphic, PdfPage page, int startingRowCount);
+        bool HasNewPages { get; }
+        void Draw(XGraphics graphic, PdfPage page);
     }
 }

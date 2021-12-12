@@ -3,6 +3,8 @@ using PdfSharpCore.Pdf;
 using PrintityFramework.Shared;
 using PrintityFramework.Shared.Core;
 using System.Drawing;
+using System.Reflection.Metadata;
+
 namespace PrintityFramework;
 
 public class PFW_Document
@@ -97,23 +99,30 @@ public class PFW_Document
     {
         PdfDocument document = new PdfDocument();
         var page = document.AddPage();
-        var graphic = XGraphics.FromPdfPage(page);
+        DrawPage(page);
+        while(Tables.Any(a => a.HasNewPages))
+        {
+            page = document.AddPage();
+            DrawPage(page);
+        }
+        document.Save(fileName);
+    }
 
+    private void DrawPage(PdfPage page)
+    {
+        var graphic = XGraphics.FromPdfPage(page);
         foreach (var item in Labels)
         {
             item.Draw(graphic, page);
         }
-
-        foreach(var item in PlaceHeaderValues)
+        foreach (var item in PlaceHeaderValues)
         {
             item.Draw(graphic, page);
         }
-
-        foreach(var item in Tables)
+        foreach (var item in Tables)
         {
-            item.Draw(graphic, page, 0);
+            item.Draw(graphic, page);
         }
-        document.Save(fileName);
     }
 }
 
