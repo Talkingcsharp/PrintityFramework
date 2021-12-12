@@ -9,6 +9,7 @@ namespace PrintityFramework;
 
 public class PFW_PlaceLabel : IPFW_BoundsObject , IPFW_DrawableObject
 {
+    public Color BackgroundColor { get; set; } = PFW_Defaults.DefaultBackgroundColor;
     public RectangleF Bounds { get; set; }
     public PFW_MeasurementsEnum BoundsUnit { get; set; } = PFW_MeasurementsEnum.Dot;
     public string Text { get; set; } = "";
@@ -46,6 +47,11 @@ public class PFW_PlaceLabel : IPFW_BoundsObject , IPFW_DrawableObject
         return this;
     }
 
+    public PFW_PlaceLabel SetBackgroundColor(Color color)
+    {
+        this.BackgroundColor = color;
+        return this;
+    }
     public void Draw(XGraphics graphic, PdfPage page)
     {
         DrawBorders(graphic, page);
@@ -54,6 +60,10 @@ public class PFW_PlaceLabel : IPFW_BoundsObject , IPFW_DrawableObject
 
     private void DrawBorders(XGraphics graphic, PdfPage page)
     {
+        if(BackgroundColor != Color.Transparent)
+        {
+            graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(BackgroundColor.ToArgb())), PFW_MeasurementesHelper.GetBounds(this, page));
+        }
         graphic.DrawRectangle(Font?.GetXPen(), PFW_MeasurementesHelper.GetBounds(this, page));
     }
 

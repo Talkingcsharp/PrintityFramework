@@ -12,6 +12,9 @@ namespace PrintityFramework.Shared.Core
         public static Color DefaultColor => Color.Black;
         public static Color DefaultAlternateColor => Color.Gray;
         public static Color DefaultHeaderColor => Color.Black;
+        public static Color DefaultBackgroundColor => Color.Transparent;
+        public static Color DefaultAlternatingBackgroundColor => Color.LightGray;
+        public static Color DefaultHeraderBackgroundColor => Color.LightSkyBlue;
         public static int DefaultFontSize => 12;
         public static int DefaultHeaderFontSize => 14;
         public static int DefaultAlternateFonrSize => 12;

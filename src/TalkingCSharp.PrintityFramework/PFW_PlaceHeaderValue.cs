@@ -21,7 +21,8 @@ public class PFW_PlaceHeaderValue: IPFW_HeaderBoundsObject, IPFW_DrawableObject
     public PFW_VerticalAlignment HeaderVAlien { get; set; } = PFW_VerticalAlignment.Middle;
     public PFW_HorizontalAlignment HAlign { get; set; } = PFW_HorizontalAlignment.Center;
     public PFW_VerticalAlignment VAlien { get; set; } = PFW_VerticalAlignment.Middle;
-
+    public Color BackGroundColor { get; set; } = PFW_Defaults.DefaultBackgroundColor;
+    public Color HeaderBackgroundColor { get; set; } = PFW_Defaults.DefaultHeraderBackgroundColor;
     public PFW_PlaceHeaderValue SetBounds(RectangleF bounds, PFW_MeasurementsEnum unit)
     {
         this.Bounds = bounds;
@@ -78,6 +79,18 @@ public class PFW_PlaceHeaderValue: IPFW_HeaderBoundsObject, IPFW_DrawableObject
         return this;
     }
 
+    public PFW_PlaceHeaderValue SetBackgroundColor(Color color)
+    {
+        this.BackGroundColor = color;
+        return this;
+    }
+
+    public PFW_PlaceHeaderValue SetHeaderBackgroundColor(Color color)
+    {
+        this.HeaderBackgroundColor = color;
+        return this;
+    }
+
     public void Draw(XGraphics graphic, PdfPage page)
     {
         DrawHeaderBorders(graphic, page);
@@ -88,23 +101,24 @@ public class PFW_PlaceHeaderValue: IPFW_HeaderBoundsObject, IPFW_DrawableObject
 
     private void DrawBorders(XGraphics graphic, PdfPage page)
     {
+        if(BackGroundColor != Color.Transparent)
+        {
+            graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(BackGroundColor.ToArgb())), PFW_MeasurementesHelper.GetBounds(this, page));
+        }
         graphic.DrawRectangle(Font?.GetXPen(), PFW_MeasurementesHelper.GetBounds(this, page));
     }
 
     private void DrawText(XGraphics graphic, PdfPage page)
     {
         PFW_TextHelper.DrawText(graphic, Text, Font, PFW_MeasurementesHelper.GetBounds(this, page), true, HAlign);
-        XTextFormatter formatter = new XTextFormatter(graphic);
-        formatter.Alignment = PFW_MeasurementesHelper.GetParagraphAlign(HAlign);
-        formatter.DrawString(Text,
-            Font?.GetXFont(),
-            Font?.GetXBrush(),
-            PFW_MeasurementesHelper.GetBounds(this, page),
-            XStringFormats.TopLeft);
     }
 
     private void DrawHeaderBorders(XGraphics graphic,PdfPage page)
     {
+        if(HeaderBackgroundColor != Color.Transparent)
+        {
+            graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(HeaderBackgroundColor.ToArgb())), PFW_MeasurementesHelper.GetHeaderBounds(this, page));
+        }
         graphic.DrawRectangle(HeaderFont?.GetXPen(), PFW_MeasurementesHelper.GetHeaderBounds(this, page));
     }
     private void DrawHeaderText(XGraphics graphic,PdfPage page)

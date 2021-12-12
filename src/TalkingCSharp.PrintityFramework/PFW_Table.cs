@@ -13,9 +13,30 @@ public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
     public float RowHeight { get; set; } = 40;
     public RectangleF Bounds { get; set; }
     public PFW_MeasurementsEnum BoundsUnit { get; set; }
+    public Color BackgroundColor { get; set; } = PFW_Defaults.DefaultBackgroundColor;
+    public Color HeaderBackgroundColor { get; set; } = PFW_Defaults.DefaultHeraderBackgroundColor;
+    public Color AlternateBackgroundColor { get; set; } = PFW_Defaults.DefaultAlternatingBackgroundColor;
     public List<object>? Data { get; set; }
-        internal int CurrentRowIndex { get; private set; }
+    internal int CurrentRowIndex { get; private set; }
     public bool HasNewPages { get; private set; } = false;
+
+    public PFW_Table<DataType> SetBackgroundColor(Color color)
+    {
+        this.BackgroundColor = color;
+        return this;
+    }
+
+    public PFW_Table<DataType> SetAlternateBackgroundColor(Color color)
+    {
+        this.AlternateBackgroundColor = color;
+        return this;
+    }
+
+    public PFW_Table<DataType> SetHeaderBackgroundColor(Color color)
+    {
+        this.HeaderBackgroundColor = color;
+        return this;
+    }
     public PFW_Table<DataType> AddColumn(PFW_TableColumn column)
     {
         this.Columns.Add(column);
@@ -55,6 +76,7 @@ public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
         bool isAlternate = false;
         foreach (var item in Columns)
         {
+            SetColumnColors(item);
             var columnBounds = PFW_MeasurementesHelper.GetTableHeaderColumnBounds(currentLocation, page, this, item);
             item.DrawHeader(graphic, columnBounds);
             currentLocation.X += columnBounds.Width;
@@ -77,6 +99,22 @@ public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
             isAlternate = !isAlternate;
         }
         HasNewPages = CurrentRowIndex < Data?.Count;
+    }
+
+    private void SetColumnColors(PFW_TableColumn input)
+    {
+        if (input.BackgroundColor == PFW_Defaults.DefaultBackgroundColor)
+        {
+            input.SetBackgroundColor(this.BackgroundColor);
+        }
+        if (input.HeaderBackgroundColor == PFW_Defaults.DefaultHeraderBackgroundColor)
+        {
+            input.SetHeaderBackgroundColor(this.HeaderBackgroundColor);
+        }
+        if (input.AlternateBackgroundColor == PFW_Defaults.DefaultAlternatingBackgroundColor)
+        {
+            input.SetAlternateBackgroundColor(AlternateBackgroundColor);
+        }
     }
 }
 

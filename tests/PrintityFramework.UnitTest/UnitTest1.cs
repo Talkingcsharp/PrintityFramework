@@ -42,13 +42,17 @@ namespace PrintityFramework.UnitTest
                         .SetPropertyName(nameof(Student.IsMale))
                         .SetWidth(10, PFW_MeasurementsEnum.Percent)))
                 .AddLabel(new PFW_PlaceLabel()
-                    .SetBounds(new RectangleF(10, 85, 50, 10), PFW_MeasurementsEnum.Percent)
+                    .SetBounds(new RectangleF(10, 85, 40, 10), PFW_MeasurementsEnum.Percent)
                     .SetFont(new PFW_Font()
                         .SetSize(8)
                         .SetColor(Color.Green))
                     .SetText("Quick Brown Foxes gives brands a voice. We provide strategic frameworks, creative power and expert guidance in communication. We work at the crossroads between what brands offer and what people need.")
-                    .SetHAlign(PFW_HorizontalAlignment.Left)
-                    );
+                    .SetHAlign(PFW_HorizontalAlignment.Left))
+                .AddHeaderValue(new PFW_PlaceHeaderValue()
+                    .SetText("value")
+                    .SetHeader("HEADER")
+                    .SetBounds(new RectangleF(50, 90, 40, 5), PFW_MeasurementsEnum.Percent)
+                    .SetHeaderBounds(new RectangleF(50, 85, 40, 5), PFW_MeasurementsEnum.Percent));
             doc.CreateDocument("myfile.pdf");
             Assert.True(File.Exists("myfile.pdf"));
         }
