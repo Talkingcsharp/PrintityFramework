@@ -13,10 +13,10 @@ namespace PrintityFramework.UnitTest
         {
             var doc = new PFW_Document()
                 .AddTable(new PFW_Table<Student>()
-                    .SetBounds(new RectangleF(10, 10, 80, 80), PFW_MeasurementsEnum.Percent)
+                    .SetBounds(new RectangleF(10, 2, 80, 75), PFW_MeasurementsEnum.Percent)
                     .SetData(PrepareList())
-                    .SetRowHeaderHeight(10)
-                    .SetRowHeight(8)
+                    .SetRowHeaderHeight(14)
+                    .SetRowHeight(15)
                     .AddColumn(new PFW_TableColumn()
                         .SetHAlign(PFW_HorizontalAlignment.Center)
                         .SetHeaderHAlign(PFW_HorizontalAlignment.Center)
