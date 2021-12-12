@@ -13,7 +13,7 @@ public class PFW_TableColumn : IPFW_DrawableColumn
     public PFW_MeasurementsEnum WidthUnit { get; set; } = PFW_MeasurementsEnum.Dot;
     public PFW_Font HeaderFont { get; set; } = PFW_Defaults.DefaultHeaderFont;
     public PFW_Font Font { get; set; } = PFW_Defaults.DefaultFont;
-    public PFW_Font AlternatingFont { get; set; } = PFW_Defaults.DefaultFont;
+    public PFW_Font AlternatingFont { get; set; } = PFW_Defaults.DefaultAlternateFont;
     public PFW_HorizontalAlignment HeaderHAlign { get; set; } = PFW_HorizontalAlignment.Left;
     public PFW_VerticalAlignment HeaderVAlien { get; set; } = PFW_VerticalAlignment.Middle;
     public PFW_HorizontalAlignment HAlign { get; set; } = PFW_HorizontalAlignment.Center;
@@ -79,10 +79,18 @@ public class PFW_TableColumn : IPFW_DrawableColumn
         return this;
     }
 
-    public void Draw(XGraphics graphic, XRect bounds, string value)
+    public void Draw(XGraphics graphic, XRect bounds, string value, bool isAlternate)
     {
         graphic.DrawRectangle(Font.GetXPen(), bounds);
-        PFW_TextHelper.DrawText(graphic, value, Font, bounds, true, HAlign);
+        if (isAlternate)
+        {
+            PFW_TextHelper.DrawText(graphic, value, AlternatingFont, bounds, true, HAlign);
+        }
+        else
+        {   
+            PFW_TextHelper.DrawText(graphic, value, Font, bounds, true, HAlign);
+        }
+        
     }
 
     public void DrawHeader(XGraphics graphic, XRect bounds)

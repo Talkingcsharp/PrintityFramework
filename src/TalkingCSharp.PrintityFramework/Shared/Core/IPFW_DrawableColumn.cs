@@ -9,7 +9,7 @@ namespace PrintityFramework.Shared.Core
 {
     public interface IPFW_DrawableColumn
     {
-        void Draw(XGraphics graphic, XRect bounds, string value);
+        void Draw(XGraphics graphic, XRect bounds, string value, bool isAlternate);
         void DrawHeader(XGraphics graphic, XRect bounds);
     }
 }
