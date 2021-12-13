@@ -1,8 +1,6 @@
 ﻿using PdfSharpCore.Drawing;
-using PdfSharpCore.Drawing.Layout;
 using PrintityFramework.Shared;
 using PrintityFramework.Shared.Core;
-using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 
 namespace PrintityFramework;
@@ -23,6 +21,19 @@ public class PFW_TableColumn : IPFW_DrawableColumn
     public Color BackgroundColor { get; set; } = PFW_Defaults.DefaultBackgroundColor;
     public Color HeaderBackgroundColor { get; set; } = PFW_Defaults.DefaultHeraderBackgroundColor;
     public Color AlternateBackgroundColor { get; set; } = PFW_Defaults.DefaultAlternatingBackgroundColor;
+    public PFW_Border Border { get; set; } = PFW_Defaults.DefaultBorder;
+    public PFW_Border HeaderBorder { get; set; } = PFW_Defaults.DefaultBorder;
+    public PFW_TableColumn SetBorder(PFW_Border border)
+    {
+        this.Border = border;
+        return this;
+    }
+
+    public PFW_TableColumn SetHeaderBorder(PFW_Border border)
+    {
+        this.HeaderBorder = border;
+        return this;
+    }
     public PFW_TableColumn SetBackgroundColor(Color color)
     {
         this.BackgroundColor = color;
@@ -102,14 +113,25 @@ public class PFW_TableColumn : IPFW_DrawableColumn
 
     public void Draw(XGraphics graphic, XRect bounds, string value, bool isAlternate)
     {
-        graphic.DrawRectangle(Font.GetXPen(), bounds);
+        DrawBackGround(graphic, bounds, isAlternate);
+        DrawBorder(graphic, bounds);
+        DrawText(graphic, bounds, value, isAlternate);
+    }
+    public void DrawHeader(XGraphics graphic, XRect bounds)
+    {
+        DrawHeaderBackground(graphic, bounds);
+        DrawHeaderBorder(graphic, bounds);
+        DrawHeaderText(graphic, bounds);
+    }
+
+    private void DrawBackGround(XGraphics graphic, XRect bounds, bool isAlternate)
+    {
         if (isAlternate)
         {
             if (AlternateBackgroundColor != Color.Transparent)
             {
                 graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(AlternateBackgroundColor.ToArgb())), bounds);
             }
-            PFW_TextHelper.DrawText(graphic, value, AlternatingFont, bounds, true, HAlign);
         }
         else
         {
@@ -117,20 +139,37 @@ public class PFW_TableColumn : IPFW_DrawableColumn
             {
                 graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(BackgroundColor.ToArgb())), bounds);
             }
+        }
+    }
+    private void DrawBorder(XGraphics graphic, XRect bounds)
+    {
+        Border.Draw(graphic, bounds);
+    }
+    private void DrawText(XGraphics graphic, XRect bounds, string value, bool isAlternate)
+    {
+        if (isAlternate)
+        {
+            PFW_TextHelper.DrawText(graphic, value, AlternatingFont, bounds, true, HAlign);
+        }
+        else
+        {
             PFW_TextHelper.DrawText(graphic, value, Font, bounds, true, HAlign);
         }
-        
     }
-
-    public void DrawHeader(XGraphics graphic, XRect bounds)
+    private void DrawHeaderBackground(XGraphics graphic, XRect bounds)
     {
-        if(HeaderBackgroundColor != Color.Transparent)
+        if (HeaderBackgroundColor != Color.Transparent)
         {
             graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(HeaderBackgroundColor.ToArgb())), bounds);
         }
-        graphic.DrawRectangle(HeaderFont.GetXPen(), bounds);
+    }
+    private void DrawHeaderBorder(XGraphics graphic, XRect bounds)
+    {
+        HeaderBorder.Draw(graphic, bounds);
+    }
+    private void DrawHeaderText(XGraphics graphic, XRect bounds)
+    {
         PFW_TextHelper.DrawText(graphic, HeaderText, HeaderFont, bounds, true, HeaderHAlign);
     }
-
 }
 

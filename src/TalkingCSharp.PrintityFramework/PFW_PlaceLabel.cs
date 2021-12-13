@@ -17,6 +17,13 @@ public class PFW_PlaceLabel : IPFW_BoundsObject , IPFW_DrawableObject
     public PFW_HorizontalAlignment HAlign { get; set; } = PFW_HorizontalAlignment.Center;
     [Obsolete]
     public PFW_VerticalAlignment VAlign { get; set; } = PFW_VerticalAlignment.Middle;
+    public PFW_Border Border { get; set; } = PFW_Defaults.DefaultBorder;
+
+    public PFW_PlaceLabel SetBorder(PFW_Border border)
+    {
+        this.Border = border;
+        return this;
+    }
     public PFW_PlaceLabel SetBounds(RectangleF bounds, PFW_MeasurementsEnum unit)
     {
         this.Bounds = bounds;
@@ -54,17 +61,21 @@ public class PFW_PlaceLabel : IPFW_BoundsObject , IPFW_DrawableObject
     }
     public void Draw(XGraphics graphic, PdfPage page)
     {
+        DrawBackground(graphic, page);
         DrawBorders(graphic, page);
         DrawText(graphic, page);
     }
 
-    private void DrawBorders(XGraphics graphic, PdfPage page)
+    private void DrawBackground(XGraphics graphic, PdfPage page)
     {
-        if(BackgroundColor != Color.Transparent)
+        if (BackgroundColor != Color.Transparent)
         {
             graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(BackgroundColor.ToArgb())), PFW_MeasurementesHelper.GetBounds(this, page));
         }
-        graphic.DrawRectangle(Font?.GetXPen(), PFW_MeasurementesHelper.GetBounds(this, page));
+    }
+    private void DrawBorders(XGraphics graphic, PdfPage page)
+    {
+        Border.Draw(graphic, PFW_MeasurementesHelper.GetBounds(this, page));
     }
 
     private void DrawText(XGraphics graphic, PdfPage page)
