@@ -23,6 +23,21 @@ public class PFW_PlaceHeaderValue: IPFW_HeaderBoundsObject, IPFW_DrawableObject
     public PFW_VerticalAlignment VAlien { get; set; } = PFW_VerticalAlignment.Middle;
     public Color BackGroundColor { get; set; } = PFW_Defaults.DefaultBackgroundColor;
     public Color HeaderBackgroundColor { get; set; } = PFW_Defaults.DefaultHeraderBackgroundColor;
+
+    public PFW_Border Border { get; set; } = PFW_Defaults.DefaultBorder;
+    public PFW_Border HeaderBorder { get; set; } = PFW_Defaults.DefaultBorder;
+
+    public PFW_PlaceHeaderValue SetBorder(PFW_Border border)
+    {
+        this.Border = border;
+        return this;
+    }
+
+    public PFW_PlaceHeaderValue SetHeaderBorder(PFW_Border border)
+    {
+        this.HeaderBorder = border;
+        return this;
+    }
     public PFW_PlaceHeaderValue SetBounds(RectangleF bounds, PFW_MeasurementsEnum unit)
     {
         this.Bounds = bounds;
@@ -93,19 +108,24 @@ public class PFW_PlaceHeaderValue: IPFW_HeaderBoundsObject, IPFW_DrawableObject
 
     public void Draw(XGraphics graphic, PdfPage page)
     {
+        DrawHeaderBackground(graphic, page);
         DrawHeaderBorders(graphic, page);
         DrawHeaderText(graphic, page);
+        DrawBackground(graphic, page);
         DrawBorders(graphic, page);
         DrawText(graphic, page);
     }
-
-    private void DrawBorders(XGraphics graphic, PdfPage page)
+    private void DrawBackground(XGraphics graphic,PdfPage page)
     {
-        if(BackGroundColor != Color.Transparent)
+        if (BackGroundColor != Color.Transparent)
         {
             graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(BackGroundColor.ToArgb())), PFW_MeasurementesHelper.GetBounds(this, page));
         }
-        graphic.DrawRectangle(Font?.GetXPen(), PFW_MeasurementesHelper.GetBounds(this, page));
+    }
+    private void DrawBorders(XGraphics graphic, PdfPage page)
+    {
+        Border.Draw(graphic, PFW_MeasurementesHelper.GetBounds(this, page));
+        
     }
 
     private void DrawText(XGraphics graphic, PdfPage page)
@@ -113,13 +133,16 @@ public class PFW_PlaceHeaderValue: IPFW_HeaderBoundsObject, IPFW_DrawableObject
         PFW_TextHelper.DrawText(graphic, Text, Font, PFW_MeasurementesHelper.GetBounds(this, page), true, HAlign);
     }
 
-    private void DrawHeaderBorders(XGraphics graphic,PdfPage page)
+    private void DrawHeaderBackground(XGraphics graphic,PdfPage page)
     {
-        if(HeaderBackgroundColor != Color.Transparent)
+        if (HeaderBackgroundColor != Color.Transparent)
         {
             graphic.DrawRectangle(new XSolidBrush(XColor.FromArgb(HeaderBackgroundColor.ToArgb())), PFW_MeasurementesHelper.GetHeaderBounds(this, page));
         }
-        graphic.DrawRectangle(HeaderFont?.GetXPen(), PFW_MeasurementesHelper.GetHeaderBounds(this, page));
+    }
+    private void DrawHeaderBorders(XGraphics graphic,PdfPage page)
+    {
+        HeaderBorder.Draw(graphic, PFW_MeasurementesHelper.GetHeaderBounds(this, page));
     }
     private void DrawHeaderText(XGraphics graphic,PdfPage page)
     {
