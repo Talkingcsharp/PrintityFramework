@@ -67,32 +67,46 @@ public class PFW_Document
 
     public Stream CreateDocument()
     {
-        PdfSharpCore.Pdf.PdfDocument document = new PdfSharpCore.Pdf.PdfDocument();
+        PdfDocument document = new PdfDocument();
         var page = document.AddPage();
-        page.Height = new XUnit(_Size.Height, XGraphicsUnit.Millimeter);
-        page.Width = new XUnit(_Size.Width, XGraphicsUnit.Millimeter);
-        var graphic = XGraphics.FromPdfPage(page);
-
-        foreach(var item in Labels)
+        DrawPage(page);
+        while (Tables.Any(a => a.HasNewPages))
         {
-            item.Draw(graphic, page);
-            graphic.DrawRectangle(XPens.Black, new XRect
-            {
-                X = PFW_MeasurementesHelper.LocationHelperX(item.Bounds.X, item.BoundsUnit, page),
-                Y = PFW_MeasurementesHelper.LocationHelperY(item.Bounds.Y, item.BoundsUnit, page),
-                Height = PFW_MeasurementesHelper.SizeHelper(item.Bounds.Size, item.BoundsUnit, page).Height,
-                Width = PFW_MeasurementesHelper.SizeHelper(item.Bounds.Size, item.BoundsUnit, page).Width
-            });
-
-            graphic.DrawString(item.Text, 
-                new XFont(item.Font?.FontName, item.Font?.Size?? 0, XFontStyle.Regular),
-                XBrushes.Black, 
-                new XPoint(PFW_MeasurementesHelper.LocationHelperX(item.Bounds.X, item.BoundsUnit, page),
-                PFW_MeasurementesHelper.LocationHelperY(item.Bounds.Y, item.BoundsUnit, page)));
+            page = document.AddPage();
+            DrawPage(page);
         }
+        
         MemoryStream ms = new MemoryStream();
         document.Save(ms, true);
         return ms;
+    }
+    public List<MemoryStream> CreateDocumentAsImages()
+    {
+        PdfDocument document = new PdfDocument();
+        var page = document.AddPage();
+        DrawPage(page);
+        while (Tables.Any(a => a.HasNewPages))
+        {
+            page = document.AddPage();
+            DrawPage(page);
+        }
+
+        List<MemoryStream> output = new List<MemoryStream>();
+        foreach(var item in document.Pages)
+        {
+            output.Add(GetPageasImage(item));
+        }
+        return output;
+    }
+
+    private MemoryStream GetPageasImage(PdfPage page)
+    {
+        
+        XGraphics graphics = XGraphics.FromPdfPage(page);
+        XImage image = XBitmapImage.CreateBitmap((int)page.Width.Point, (int)page.Height.Point);
+        XGraphics imageGraphics = XGraphics.FromImage(image);
+        imageGraphics.Restore(graphics.Save());
+        return image.AsJpeg();
     }
 
     public void CreateDocument(string fileName)
@@ -110,18 +124,20 @@ public class PFW_Document
 
     private void DrawPage(PdfPage page)
     {
-        var graphic = XGraphics.FromPdfPage(page);
-        foreach (var item in Labels)
+        using (var graphic = XGraphics.FromPdfPage(page))
         {
-            item.Draw(graphic, page);
-        }
-        foreach (var item in PlaceHeaderValues)
-        {
-            item.Draw(graphic, page);
-        }
-        foreach (var item in Tables)
-        {
-            item.Draw(graphic, page);
+            foreach (var item in Labels)
+            {
+                item.Draw(graphic, page);
+            }
+            foreach (var item in PlaceHeaderValues)
+            {
+                item.Draw(graphic, page);
+            }
+            foreach (var item in Tables)
+            {
+                item.Draw(graphic, page);
+            }
         }
     }
 }
