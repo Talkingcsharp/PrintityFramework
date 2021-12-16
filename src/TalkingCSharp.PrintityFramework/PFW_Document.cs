@@ -80,35 +80,6 @@ public class PFW_Document
         document.Save(ms, true);
         return ms;
     }
-    public List<MemoryStream> CreateDocumentAsImages()
-    {
-        PdfDocument document = new PdfDocument();
-        var page = document.AddPage();
-        DrawPage(page);
-        while (Tables.Any(a => a.HasNewPages))
-        {
-            page = document.AddPage();
-            DrawPage(page);
-        }
-
-        List<MemoryStream> output = new List<MemoryStream>();
-        foreach(var item in document.Pages)
-        {
-            output.Add(GetPageasImage(item));
-        }
-        return output;
-    }
-
-    private MemoryStream GetPageasImage(PdfPage page)
-    {
-        
-        XGraphics graphics = XGraphics.FromPdfPage(page);
-        XImage image = XBitmapImage.CreateBitmap((int)page.Width.Point, (int)page.Height.Point);
-        XGraphics imageGraphics = XGraphics.FromImage(image);
-        imageGraphics.Restore(graphics.Save());
-        return image.AsJpeg();
-    }
-
     public void CreateDocument(string fileName)
     {
         PdfDocument document = new PdfDocument();

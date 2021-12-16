@@ -6,4 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Magick.NET.Core" Version="8.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TalkingCSharp.PrintityFramework\PrintityFramework.csproj" />
+  </ItemGroup>
+
 </Project>

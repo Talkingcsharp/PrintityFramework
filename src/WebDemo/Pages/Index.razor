@@ -1,9 +1,18 @@
 ﻿@page "/"
+@using Data
+@using Documents
+@inject NavigationManager _navigator;
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Report testing </PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Demo of printity framework</h1> 
 
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code{
+    List<SamplePrintityTableModel> list = new List<SamplePrintityTableModel>();
+    protected override async Task OnInitializedAsync()
+    {
+        list = SamplePrintityTableModelService.PrepareRandomList(250);
+        DocumentService service = new DocumentService();
+        var output = service.CreateSampleDocument(list);
+    }
+}

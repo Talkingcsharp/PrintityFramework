@@ -1,3 +1,5 @@
+using PdfSharpCore.Drawing;
+using PdfSharpCore.Pdf;
 using PrintityFramework.Shared;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,23 @@ namespace PrintityFramework.UnitTest
 {
     public class UnitTest1
     {
+        [Fact]
+        public void TestGraphics()
+        {
+            using (var image = XImage.FromFile("pdfimage.jpg"))
+            {
+                //image.
+                var y = image.PixelHeight;
+                var x = image.PixelWidth;
+                using (var graphics = XGraphics.FromImage(image))
+                {
+                    graphics.DrawString("sadsd", new XFont("arial", 12), XBrushes.AliceBlue, new XPoint(0, 0));
+                }
+                var ms = image.AsJpeg();
+                Assert.NotNull(ms);
+            }
+            
+        }
         [Fact]
         public void Test1()
         {
