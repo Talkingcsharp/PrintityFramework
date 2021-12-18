@@ -1,0 +1,41 @@
+﻿@page "/APIDocs"
+@using Data
+@using Documents
+@using Cache
+@inject NavigationManager _navigator;
+@inject CacheHandler _cache;
+
+<PageTitle>API Documentations</PageTitle>
+
+<h1>Section 1: Main document {PFW_Document}</h1>
+This is the main object which defines the document itself,
+These are thr properties in this object
+<dl class="p-3">
+    <dt>
+        PaperSize
+    </dt>
+    <dd class="p-2">
+        Enum {A4, A5}
+    </dd>
+    <dt>
+        Tables
+    </dt>
+    <dd>
+        PFW_Table[]
+    </dd>
+    <dt>
+        Labels
+    </dt>
+    <dd>
+        PFW_PlaceLabel[]
+    </dd>
+    <dt>
+        PlaceHeaderValues
+    </dt>
+    <dd>
+        PFW_PlaceHeaderValue[]
+    </dd>
+</dl>
+@code {
+
+}
