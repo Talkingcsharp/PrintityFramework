@@ -1,18 +1,29 @@
 ﻿@page "/"
 @using Data
 @using Documents
+@using Cache
 @inject NavigationManager _navigator;
+@inject CacheHandler _cache;
 
 <PageTitle>Report testing </PageTitle>
 
 <h1>Demo of printity framework</h1> 
 
+
+<button class="btn btn-primary" @onclick="@CreateReport">Create PDF</button>
 @code{
     List<SamplePrintityTableModel> list = new List<SamplePrintityTableModel>();
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         list = SamplePrintityTableModelService.PrepareRandomList(250);
+    }
+
+    void CreateReport()
+    {
         DocumentService service = new DocumentService();
-        var output = service.CreateSampleDocument(list);
+        var documentOutput = service.CreateSampleDocument(list);
+
+        var cacheKey = _cache.CreateNewCachedItem(documentOutput);
+        _navigator.NavigateTo($"/pdf/show/{cacheKey}",true);
     }
 }

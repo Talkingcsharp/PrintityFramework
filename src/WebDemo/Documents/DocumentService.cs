@@ -8,7 +8,7 @@ namespace WebDemo.Documents
 {
     public class DocumentService
     {
-        public Stream CreateSampleDocument(List<SamplePrintityTableModel> tableData)
+        public MemoryStream CreateSampleDocument(List<SamplePrintityTableModel> tableData)
         {
             var document = new PFW_Document();
             document
@@ -17,8 +17,11 @@ namespace WebDemo.Documents
                         .SetBorderSize(0)
                         .SetBottomBorderColor(Color.Black)
                         .SetBottomBorderSize(1))
-                    .SetFont(PFW_Defaults.DefaultHeaderFont)
-                    .SetBounds(new System.Drawing.RectangleF(10,10,80,5), PFW_MeasurementsEnum.Percent)
+                    .SetFont(new PFW_Font()
+                        .SetUderline(true)
+                        .SetFontName(PFW_Defaults.DefaultHeaderFontFamilyName)
+                        .SetSize(PFW_Defaults.DefaultHeaderFontSize))
+                    .SetBounds(new RectangleF(10,10,80,5), PFW_MeasurementsEnum.Percent)
                     .SetHAlign(PFW_HorizontalAlignment.Center)
                     .SetText("Printity framework page header"))
                 .AddTable(new PFW_Table<SamplePrintityTableModel>()
@@ -33,15 +36,20 @@ namespace WebDemo.Documents
                     .AddColumn(new PFW_TableColumn()
                         .SetHeaderText("Date")
                         .SetPropertyName(nameof(SamplePrintityTableModel.Date))
-                        .SetWidth(40, PFW_MeasurementsEnum.Percent))
+                        .SetWidth(30, PFW_MeasurementsEnum.Percent))
                     .AddColumn(new PFW_TableColumn()
                         .SetHeaderText("Nullable")
                         .SetPropertyName(nameof(SamplePrintityTableModel.Nullable))
-                        .SetWidth(10, PFW_MeasurementsEnum.Percent))
+                        .SetWidth(20, PFW_MeasurementsEnum.Percent))
                     .SetBounds(new RectangleF(10,20,80,75), PFW_MeasurementsEnum.Percent)
                     .SetData(tableData));
 
-            return document.CreateDocument();
+            var stream = document.CreateDocument() as MemoryStream;
+            if(stream is null)
+            {
+                throw new Exception("Cannot create document");
+            }
+            return stream;
         }
     }
 }

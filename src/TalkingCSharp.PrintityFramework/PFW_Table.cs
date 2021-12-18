@@ -9,8 +9,8 @@ namespace PrintityFramework;
 public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
 {
     public ICollection<PFW_TableColumn> Columns { get; set; } = new List<PFW_TableColumn>();
-    public float RowHeaderHeight { get; set; } = 50;
-    public float RowHeight { get; set; } = 40;
+    public float RowHeaderHeight { get; set; } = PFW_Defaults.DefaultTableRowHeaderHeight;
+    public float RowHeight { get; set; } = PFW_Defaults.DefaultTableRowHeight;
     public RectangleF Bounds { get; set; }
     public PFW_MeasurementsEnum BoundsUnit { get; set; }
     public Color BackgroundColor { get; set; } = PFW_Defaults.DefaultBackgroundColor;

@@ -20,6 +20,9 @@ namespace WebDemo.Cache
             return stringKey;
         }
 
-        public 
+        public string GetCachedItem(string key)
+        {
+            return _cache.Get<string>(key);
+        }
     }
 }

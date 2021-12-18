@@ -79,6 +79,10 @@ public class PFW_TextHelper
             {
                 return;
             }
+            if(lastBlock.Length < 4)
+            {
+                return;
+            }
             if (lastBlock.StartIndex + lastBlock.Length < Text.Length)
             {
                 lastBlock.Text = lastBlock.Text.Substring(0, lastBlock.Text.Length - 4) + " ...";
