@@ -2,6 +2,7 @@
 using PdfSharpCore.Pdf;
 using PrintityFramework.Shared;
 using PrintityFramework.Shared.Core;
+using System.Collections;
 using System.Drawing;
 
 namespace PrintityFramework;
@@ -16,7 +17,7 @@ public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
     public Color BackgroundColor { get; set; } = PFW_Defaults.DefaultBackgroundColor;
     public Color HeaderBackgroundColor { get; set; } = PFW_Defaults.DefaultHeraderBackgroundColor;
     public Color AlternateBackgroundColor { get; set; } = PFW_Defaults.DefaultAlternatingBackgroundColor;
-    public List<object>? Data { get; set; }
+    public IList? Data { get; set; }
     internal int CurrentRowIndex { get; private set; }
     public bool HasNewPages { get; private set; } = false;
 
@@ -90,7 +91,7 @@ public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
             foreach (var item in Columns)
             {
                 var columnBounds = PFW_MeasurementesHelper.GetTableColumnBounds(currentLocation, page, this, item);
-                item.Draw(graphic, columnBounds, Data[CurrentRowIndex].GetStringValue(item), isAlternate);
+                item.Draw(graphic, columnBounds, Data?[CurrentRowIndex]?.GetStringValue(item)?? "", isAlternate);
                 currentLocation.X += columnBounds.Width;
             }
             currentLocation.X = bounds.X;
