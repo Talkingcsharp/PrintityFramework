@@ -7,35 +7,244 @@
 
 <PageTitle>API Documentations</PageTitle>
 
-<h1>Section 1: Main document {PFW_Document}</h1>
-This is the main object which defines the document itself,
-These are thr properties in this object
-<dl class="p-3">
-    <dt>
-        PaperSize
-    </dt>
-    <dd class="p-2">
-        Enum {A4, A5}
-    </dd>
-    <dt>
-        Tables
-    </dt>
-    <dd>
-        PFW_Table[]
-    </dd>
-    <dt>
-        Labels
-    </dt>
-    <dd>
-        PFW_PlaceLabel[]
-    </dd>
-    <dt>
-        PlaceHeaderValues
-    </dt>
-    <dd>
-        PFW_PlaceHeaderValue[]
-    </dd>
-</dl>
-@code {
+<nav class="nav navbar  navbar-expand bg-primary">
+    <AnchorTag class="nav-link text-light" href="#Border">Border</AnchorTag>
+    <button class="nav-link text-light" @onclick="@(async () => await Top.FocusAsync())">Top</button>
+    <button class="nav-link text-light" @onclick="@(async () => await Document.FocusAsync())">Document</button>
+    <button class="nav-link text-light" @onclick="@(async () => await Font.FocusAsync())">Font</button>
+    <button class="nav-link text-light" @onclick="@(async () => await Border.FocusAsync())">Border</button>
 
+</nav>
+
+<div id="Top" @ref="@Top" class="container-fluid bg-dark text-light">
+    <h2 class="docs-title">Printity framework API dociumentation</h2>
+
+    <p>
+        This is a documentation of how you can call Printityframework API server to create your own custom PDFs <br />
+        Included in this documentation the objects of PFW (Printity framework) and their properties and a complete JSON
+        Examples of how you can call the API server.
+    </p>
+    <h3 class="docs-title" id="Document" @ref="@Document">Section 1: Main document {PFW_Document}</h3>
+    <div class="docs-bg-light" style="padding-left:24px;">
+        <div>
+            This is the main object which defines the document itself,
+            These are thr properties in this object
+        </div>
+        <div class="text-decoration-underline docs-property">
+            Paper size
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum {A4, A5}
+            <div class="docs-bg-lighter">
+                This will define the pages dimentsions of the document, currently we support A4, and A5 paper sizes
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Tables
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            PFW_Table[]
+            <div class="docs-bg-lighter">
+                This is an array of table objects, this will allow you to add tables to the document, we support multiple tables definitions to the doucments
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Labels
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            PFW_PlaceLabel[]
+            <div class="docs-bg-lighter">
+                This is an array of label objects, this type of objects will allow you to add labels / captions / titles to your documents that will repeate with every page
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            PlaceHeaderValues
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            PFW_PlaceHeaderValue[]
+            <div class="docs-bg-lighter">
+                This is an array of header value objects, they're much like labels but each object contains a hader and a value objects, this type is suitable for adding sums / avgs / and other titled objects
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <h3 class="docs-title" id="Font" @ref="@Font">Section 2: Font {PFW_Font}</h3>
+    <div class="docs-bg-light" style="padding-left:24px;">
+        <div>
+            This is the main holder of the font related properties, and other text decoration properties
+        </div>
+        <div class="text-decoration-underline docs-property">
+            FontName
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            String
+            <div class="docs-bg-lighter">
+                A string holder for the font-family name, default is Arial.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Bold
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Boolean
+            <div class="docs-bg-lighter">
+                A boolean holder for the text bold property, default is false.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Italic
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Boolean
+            <div class="docs-bg-lighter">
+                A boolean holder for the text italic property, default is false.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Underline
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Boolean
+            <div class="docs-bg-lighter">
+                A boolean holder for the text underline property, default is false.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Size
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Integer
+            <div class="docs-bg-lighter">
+                An integral holder for the text size property.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Color
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                A color holder for the text color property.
+            </div>
+        </div>
+    </div>
+    <p></p>
+
+    <h3 class="docs-title" id="Border">Section 3: Border {PFW_Border}</h3>
+    <div class="docs-bg-light" style="padding-left:24px;">
+        <div>
+            This is the main holder of the border related properties.
+        </div>
+        
+        <div class="text-decoration-underline docs-property">
+            BorderColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                The main color of the borders.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            TopBorderColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                The top border color.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            LeftBorderColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                The left border color.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            BottomBorderColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                The bottom border color.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            RightBorderColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                The right border color.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            BorderSize
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            float
+            <div class="docs-bg-lighter">
+                The main border size.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            TopBorderSize
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            float
+            <div class="docs-bg-lighter">
+                The top border size.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            LeftBorderSize
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            float
+            <div class="docs-bg-lighter">
+                The left border size.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            BottomBorderSize
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            float
+            <div class="docs-bg-lighter">
+                The bottom border size.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            RightBorderSize
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            float
+            <div class="docs-bg-lighter">
+                The right border size.
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    ElementReference Top, Document, Font, Border;
 }

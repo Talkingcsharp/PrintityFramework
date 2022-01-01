@@ -62,3 +62,17 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+.docs-property {
+    background-color: #333;
+    color:#f3924e;
+}
+
+.docs-description {
+    background-color: #555;
+    border:2px inset black;
+}
+.docs-title{
+    color: #a69100;
+}
