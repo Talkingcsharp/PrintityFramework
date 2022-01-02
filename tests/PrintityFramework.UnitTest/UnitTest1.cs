@@ -127,11 +127,11 @@ namespace PrintityFramework.UnitTest
                     .SetHeaderBounds(new RectangleF(50, 85, 40, 5), PFW_MeasurementsEnum.Percent));
             //doc.CreateDocument("myfile.pdf");
             //Assert.True(File.Exists("myfile.pdf"));
-            var output = doc.CreateDocumentAsImages();
-            for(int i =1;i<= output.Count; i++)
-            {
-                File.WriteAllBytes($"{i}.jpg", output[i].ToArray());
-            }
+            //var output = doc.CreateDocumentAsImages();
+            //for(int i =1;i<= output.Count; i++)
+            //{
+            //    File.WriteAllBytes($"{i}.jpg", output[i].ToArray());
+            //}
         }
 
         List<Student> PrepareList()

@@ -15,7 +15,7 @@ namespace WebDemo.Pages
 
         public IActionResult OnGet()
         {
-            var cachId = Request.RouteValues["id"].ToString()?? "";
+            var cachId = Request.RouteValues["id"]?.ToString()?? "";
             var cacheString = _cacheHandler.GetCachedItem(cachId);
             var bytes = Convert.FromBase64String(cacheString);
             return File(bytes, "application/octet-stream", "document.pdf");

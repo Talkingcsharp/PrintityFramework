@@ -42,7 +42,7 @@
         {
             // If the target ID has been specified, we know this is an anchor link that we need to scroll
             // to, so we call the JavaScript method to take care of this for us.
-            await JSRuntime.InvokeVoidAsync("document.getElementById(\"" + targetId + "\").scrollIntoView()");
+            await JSRuntime.InvokeVoidAsync("document.getElementById('" + targetId + "').scrollIntoView()");
         }
     }
 }

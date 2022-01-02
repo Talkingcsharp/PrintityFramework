@@ -1,30 +1,21 @@
-﻿@page "/APIDocs"
+﻿@page "/APIRef"
 @using Data
 @using Documents
 @using Cache
 @inject NavigationManager _navigator;
 @inject CacheHandler _cache;
 
-<PageTitle>API Documentations</PageTitle>
+<PageTitle>API reference</PageTitle>
 
-<nav class="nav navbar  navbar-expand bg-primary">
-    <AnchorTag class="nav-link text-light" href="#Border">Border</AnchorTag>
-    <button class="nav-link text-light" @onclick="@(async () => await Top.FocusAsync())">Top</button>
-    <button class="nav-link text-light" @onclick="@(async () => await Document.FocusAsync())">Document</button>
-    <button class="nav-link text-light" @onclick="@(async () => await Font.FocusAsync())">Font</button>
-    <button class="nav-link text-light" @onclick="@(async () => await Border.FocusAsync())">Border</button>
-
-</nav>
-
-<div id="Top" @ref="@Top" class="container-fluid bg-dark text-light">
-    <h2 class="docs-title">Printity framework API dociumentation</h2>
+<div id="Top" class="container-fluid bg-dark text-light">
+    <h2 class="docs-title">Printity framework API reference</h2>
 
     <p>
         This is a documentation of how you can call Printityframework API server to create your own custom PDFs <br />
         Included in this documentation the objects of PFW (Printity framework) and their properties and a complete JSON
         Examples of how you can call the API server.
     </p>
-    <h3 class="docs-title" id="Document" @ref="@Document">Section 1: Main document {PFW_Document}</h3>
+    <h3 class="docs-title" id="Document">Section 1: Main document {PFW_Document}</h3>
     <div class="docs-bg-light" style="padding-left:24px;">
         <div>
             This is the main object which defines the document itself,
@@ -71,7 +62,7 @@
         </div>
     </div>
     <p></p>
-    <h3 class="docs-title" id="Font" @ref="@Font">Section 2: Font {PFW_Font}</h3>
+    <h3 class="docs-title" id="Font">Section 2: Font {PFW_Font}</h3>
     <div class="docs-bg-light" style="padding-left:24px;">
         <div>
             This is the main holder of the font related properties, and other text decoration properties
@@ -138,7 +129,7 @@
     </div>
     <p></p>
 
-    <h3 class="docs-title" id="Border">Section 3: Border {PFW_Border}</h3>
+    <h3 class="docs-title" name="border" @id="border" id="border">Section 3: Border {PFW_Border}</h3>
     <div class="docs-bg-light" style="padding-left:24px;">
         <div>
             This is the main holder of the border related properties.
@@ -246,5 +237,4 @@
     </div>
 </div>
 @code {
-    ElementReference Top, Document, Font, Border;
 }
