@@ -4,6 +4,10 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+body {
+    padding-top: 70px;
+}
+
 h1:focus {
     outline: none;
 }
@@ -73,6 +77,11 @@ a, .btn-link {
     background-color: #555;
     border:2px inset black;
 }
-.docs-title{
+.docs-bg-lighter {
+    background-color: #aaa;
+    color:#010167;
+    margin-left:-15px;
+}
+.docs-title {
     color: #a69100;
 }

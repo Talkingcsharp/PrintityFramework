@@ -235,6 +235,321 @@
             </div>
         </div>
     </div>
+    <p></p>
+    <h3 class="docs-title" name="border" @id="border" id="border">Section 4: Font {PFW_Font}</h3>
+    <div class="docs-bg-light" style="padding-left:24px;">
+        <div>
+            This is the main holder of font and writing related properties.
+        </div>
+        
+        <div class="text-decoration-underline docs-property">
+            FontName
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            String
+            <div class="docs-bg-lighter">
+                The font (family) name for the writing object.
+            </div>
+        </div>
+
+         <div class="text-decoration-underline docs-property">
+            Bold
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Boolean
+            <div class="docs-bg-lighter">
+                Is the writing text bold or normal (regullar).
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Italic
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Boolean
+            <div class="docs-bg-lighter">
+                Is the writing text italic or normal (regullar).
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Underline
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Boolean
+            <div class="docs-bg-lighter">
+                Is the writing text underlined or not.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Size
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Integer
+            <div class="docs-bg-lighter">
+                To set the font size of the writing text.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Color
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                Set the color of the writing text.
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <h3 class="docs-title" name="border" @id="border" id="border">Section 5: Label {PFW_PlaceLabel}</h3>
+    <div class="docs-bg-light" style="padding-left:24px;">
+        <div>
+            This is a drawale object to place a label on the printed document, and repeating it in every page.
+        </div>
+        
+        <div class="text-decoration-underline docs-property">
+            BackgroundColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                Sets the background color of the label.
+            </div>
+        </div>
+
+         <div class="text-decoration-underline docs-property">
+            Bounds
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            RectangleF
+            <div class="docs-bg-lighter">
+                Sets the bounds (Top , Left, Height, Width) of the label.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            BoundsUnit
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum { Percent , Dot (Currently represented as Millimeter)}
+            <div class="docs-bg-lighter">
+                The unit of the bounds.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Text
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            String
+            <div class="docs-bg-lighter">
+                The text that will be written on the label.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Font
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            PFW_Font
+            <div class="docs-bg-lighter">
+                The label text font properties.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            HAlign
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum {Left, Center, Right}
+            <div class="docs-bg-lighter">
+                The horizontal alignment for text written in the label.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            VAlign
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Not implemented yet
+            <div class="docs-bg-lighter">
+                The vertical alignment for text written in the label.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Border
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            PFW_Border
+            <div class="docs-bg-lighter">
+                The properties of the label's border
+            </div>
+        </div>
+    </div>
+
+    <p></p>
+    <h3 class="docs-title" name="border" @id="border" id="border">Section 6: Header value {PFW_PlaceHeaderValue}</h3>
+    <div class="docs-bg-light" style="padding-left:24px;">
+        <div>
+            This is a drawale object combines two labels, one for the header and one for the value (AKA: master detail).
+        </div>
+        
+        <div class="text-decoration-underline docs-property">
+            Bounds
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            RectangleF
+            <div class="docs-bg-lighter">
+                The bounds of the value label.
+            </div>
+        </div>
+
+         <div class="text-decoration-underline docs-property">
+            BoundsUnit
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum { Percent , Dot (Currently represented as Millimeter)}
+            <div class="docs-bg-lighter">
+                The measuring unit of the bounds of the value label
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            HeaderBounds
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            RectangleF
+            <div class="docs-bg-lighter">
+                The bounds of the header label
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            HeaderBoundsUnit
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum { Percent , Dot (Currently represented as Millimeter)}
+            <div class="docs-bg-lighter">
+                The measuring unit of the bounds of the header label.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Header
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            String
+            <div class="docs-bg-lighter">
+                The text of the header label.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Text
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            String
+            <div class="docs-bg-lighter">
+                The text of the value label
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Font
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            PFW_Font
+            <div class="docs-bg-lighter">
+                The font of the value text.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            HeaderFont
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            PFW_Font
+            <div class="docs-bg-lighter">
+                The font of the header text
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            HeaderHAlign
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum {Left, Center, Right} 
+            <div class="docs-bg-lighter">
+                The horizontal alignment of the header text. 
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            HeaderVAlien
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Not implemented yet
+            <div class="docs-bg-lighter">
+                The vertical alignment of the header text. 
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            HAlign
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum {Left, Center, Right} 
+            <div class="docs-bg-lighter">
+                The horizontal alignment of the value text. 
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            VAlien
+        </div>
+       <div class="docs-description" style="padding-left:20px;">
+            Not implemented yet
+            <div class="docs-bg-lighter">
+                The vertical alignment of the header text. 
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            BackGroundColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                The back ground color of the value label
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            HeaderBackgroundColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                The back ground color of the header label
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            Border
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            PFW_Border
+            <div class="docs-bg-lighter">
+                The border of the value label
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            HeaderBorder
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+           PFW_Border
+            <div class="docs-bg-lighter">
+                The border of the value label
+            </div>
+        </div>
+    </div>
 </div>
 @code {
 }
