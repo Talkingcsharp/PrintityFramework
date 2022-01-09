@@ -142,7 +142,7 @@ namespace PrintityFramework.Shared
 
             return XParagraphAlignment.Center;
         }
-        public static XRect GetTableColumnBounds<DataType>(XPoint startLocation, PdfPage page, PFW_Table<DataType> table, PFW_TableColumn column)
+        public static XRect GetTableColumnBounds<DataType>(XPoint startLocation, PdfPage page, PFW_Table<DataType> table, PFW_TableColumn column) where DataType : class
         {
             XRect parentBounds = GetBounds(table, page);
             float columnWidth;
@@ -162,7 +162,7 @@ namespace PrintityFramework.Shared
                 Width = columnWidth
             };
         }
-        public static XRect GetTableHeaderColumnBounds<DataType>(XPoint startLocation, PdfPage page, PFW_Table<DataType> table, PFW_TableColumn column)
+        public static XRect GetTableHeaderColumnBounds<DataType>(XPoint startLocation, PdfPage page, PFW_Table<DataType> table, PFW_TableColumn column) where DataType : class
         {
             XRect parentBounds = GetBounds(table, page);
             float columnWidth;

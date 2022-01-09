@@ -69,19 +69,22 @@ a, .btn-link {
 
 
 .docs-property {
-    background-color: #333;
-    color:#f3924e;
+    background-color: #1e1e1e;
+    color: #49bea5;
 }
 
 .docs-description {
-    background-color: #555;
-    border:2px inset black;
+    background-color: #1e1e1e;
+    color: #a5dcf5;
 }
 .docs-bg-lighter {
-    background-color: #aaa;
-    color:#010167;
-    margin-left:-15px;
+    background-color: #1e1e1e;
+    color: #ca8766;
+    margin-left: -15px;
 }
 .docs-title {
-    color: #a69100;
+    color: #fff;
+}
+.docs-desc-title {
+    color: #ae81ff;
 }

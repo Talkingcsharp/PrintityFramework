@@ -15,11 +15,12 @@
         Included in this documentation the objects of PFW (Printity framework) and their properties and a complete JSON
         Examples of how you can call the API server.
     </p>
+    <div style="padding-left:5em;">
     <h3 class="docs-title" id="Document">Section 1: Main document {PFW_Document}</h3>
     <div class="docs-bg-light" style="padding-left:24px;">
-        <div>
+        <div class="docs-desc-title">
             This is the main object which defines the document itself,
-            These are thr properties in this object
+            These are the properties in this object
         </div>
         <div class="text-decoration-underline docs-property">
             Paper size
@@ -27,7 +28,7 @@
         <div class="docs-description" style="padding-left:20px;">
             Enum {A4, A5}
             <div class="docs-bg-lighter">
-                This will define the pages dimentsions of the document, currently we support A4, and A5 paper sizes
+                This will define the pages dimensions of the document, currently we support A4, and A5 paper sizes
             </div>
         </div>
 
@@ -37,7 +38,7 @@
         <div class="docs-description" style="padding-left:20px;">
             PFW_Table[]
             <div class="docs-bg-lighter">
-                This is an array of table objects, this will allow you to add tables to the document, we support multiple tables definitions to the doucments
+                This is an array of table objects, this will allow you to add tables to the document, we support multiple tables definitions to the documents.
             </div>
         </div>
 
@@ -47,7 +48,7 @@
         <div class="docs-description" style="padding-left:20px;">
             PFW_PlaceLabel[]
             <div class="docs-bg-lighter">
-                This is an array of label objects, this type of objects will allow you to add labels / captions / titles to your documents that will repeate with every page
+                This is an array of label objects, this type of objects will allow you to add labels / captions / titles to your documents that will repeat with every page
             </div>
         </div>
 
@@ -57,14 +58,14 @@
         <div class="docs-description" style="padding-left:20px;">
             PFW_PlaceHeaderValue[]
             <div class="docs-bg-lighter">
-                This is an array of header value objects, they're much like labels but each object contains a hader and a value objects, this type is suitable for adding sums / avgs / and other titled objects
+                This is an array of header value objects, they're much like labels, but each object contains a header and a value objects, this type is suitable for adding sums / avgs / and other titled objects
             </div>
         </div>
     </div>
     <p></p>
     <h3 class="docs-title" id="Font">Section 2: Font {PFW_Font}</h3>
     <div class="docs-bg-light" style="padding-left:24px;">
-        <div>
+        <div class="docs-desc-title">
             This is the main holder of the font related properties, and other text decoration properties
         </div>
         <div class="text-decoration-underline docs-property">
@@ -131,7 +132,7 @@
 
     <h3 class="docs-title" name="border" @id="border" id="border">Section 3: Border {PFW_Border}</h3>
     <div class="docs-bg-light" style="padding-left:24px;">
-        <div>
+        <div class="docs-desc-title">
             This is the main holder of the border related properties.
         </div>
         
@@ -238,7 +239,7 @@
     <p></p>
     <h3 class="docs-title" name="border" @id="border" id="border">Section 4: Font {PFW_Font}</h3>
     <div class="docs-bg-light" style="padding-left:24px;">
-        <div>
+        <div class="docs-desc-title">
             This is the main holder of font and writing related properties.
         </div>
         
@@ -258,7 +259,7 @@
         <div class="docs-description" style="padding-left:20px;">
             Boolean
             <div class="docs-bg-lighter">
-                Is the writing text bold or normal (regullar).
+                Is the writing text bold or normal (regular).
             </div>
         </div>
 
@@ -268,7 +269,7 @@
         <div class="docs-description" style="padding-left:20px;">
             Boolean
             <div class="docs-bg-lighter">
-                Is the writing text italic or normal (regullar).
+                Is the writing text italic or normal (regular).
             </div>
         </div>
 
@@ -305,8 +306,8 @@
     <p></p>
     <h3 class="docs-title" name="border" @id="border" id="border">Section 5: Label {PFW_PlaceLabel}</h3>
     <div class="docs-bg-light" style="padding-left:24px;">
-        <div>
-            This is a drawale object to place a label on the printed document, and repeating it in every page.
+        <div class="docs-desc-title">
+            This is a drawable object to place a label on the printed document, and repeating it in every page.
         </div>
         
         <div class="text-decoration-underline docs-property">
@@ -325,7 +326,7 @@
         <div class="docs-description" style="padding-left:20px;">
             RectangleF
             <div class="docs-bg-lighter">
-                Sets the bounds (Top , Left, Height, Width) of the label.
+                Sets the bounds (Top, Left, Height, Width) of the label.
             </div>
         </div>
 
@@ -333,7 +334,7 @@
             BoundsUnit
         </div>
         <div class="docs-description" style="padding-left:20px;">
-            Enum { Percent , Dot (Currently represented as Millimeter)}
+            Enum {Percent, Dot (Currently represented as Millimeter)}
             <div class="docs-bg-lighter">
                 The unit of the bounds.
             </div>
@@ -393,8 +394,8 @@
     <p></p>
     <h3 class="docs-title" name="border" @id="border" id="border">Section 6: Header value {PFW_PlaceHeaderValue}</h3>
     <div class="docs-bg-light" style="padding-left:24px;">
-        <div>
-            This is a drawale object combines two labels, one for the header and one for the value (AKA: master detail).
+        <div class="docs-desc-title">
+            This is a drawable object combines two labels, one for the header and one for the value (AKA: master detail).
         </div>
         
         <div class="text-decoration-underline docs-property">
@@ -411,7 +412,7 @@
             BoundsUnit
         </div>
         <div class="docs-description" style="padding-left:20px;">
-            Enum { Percent , Dot (Currently represented as Millimeter)}
+            Enum {Percent, Dot (Currently represented as Millimeter)}
             <div class="docs-bg-lighter">
                 The measuring unit of the bounds of the value label
             </div>
@@ -431,7 +432,7 @@
             HeaderBoundsUnit
         </div>
         <div class="docs-description" style="padding-left:20px;">
-            Enum { Percent , Dot (Currently represented as Millimeter)}
+            Enum {Percent, Dot (Currently represented as Millimeter)}
             <div class="docs-bg-lighter">
                 The measuring unit of the bounds of the header label.
             </div>
@@ -519,7 +520,7 @@
         <div class="docs-description" style="padding-left:20px;">
             Color
             <div class="docs-bg-lighter">
-                The back ground color of the value label
+                The background color of the value label
             </div>
         </div>
         <div class="text-decoration-underline docs-property">
@@ -528,7 +529,7 @@
         <div class="docs-description" style="padding-left:20px;">
             Color
             <div class="docs-bg-lighter">
-                The back ground color of the header label
+                The background color of the header label
             </div>
         </div>
         <div class="text-decoration-underline docs-property">
@@ -550,6 +551,275 @@
             </div>
         </div>
     </div>
+
+    <p></p>
+    <h3 class="docs-title" name="border" @id="border" id="border">Section 7: Table column {PFW_TableColumn}</h3>
+    <div class="docs-bg-light" style="padding-left:24px;">
+       <div class="docs-desc-title">
+            This is a container for the properties and functions of a single column in any table.
+        </div>
+        
+        <div class="text-decoration-underline docs-property">
+            PropertyName
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            String
+            <div class="docs-bg-lighter">
+                Sets the property name in the data set to be displayed in the column.
+            </div>
+        </div>
+
+         <div class="text-decoration-underline docs-property">
+            HeaderText
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            String
+            <div class="docs-bg-lighter">
+                Sets the column's header text.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Width
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Float
+            <div class="docs-bg-lighter">
+                Sets the column's width
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            WidthUnit
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum {Percent, Dot (Currently represented as Millimeter)}
+            <div class="docs-bg-lighter">
+                The measuring unit of the column's width.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            HeaderFont
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            PFW_Font
+            <div class="docs-bg-lighter">
+                Sets the font and writing attributes of the header.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Font
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            PFW_Font
+            <div class="docs-bg-lighter">
+                Sets the font and writing attributes of the data rows.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            AlternatingFont
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            PFW_Font
+            <div class="docs-bg-lighter">
+                Sets the font and writing attributes of the data alternate rows.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            HeaderHAlign
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum {Left, Center, Right}
+            <div class="docs-bg-lighter">
+                The horizontal alignment of the header text.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            HeaderHAlign
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum {Left, Center, Right} 
+            <div class="docs-bg-lighter">
+                The horizontal alignment of the header text. 
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            HeaderVAlien
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Not implemented yet
+            <div class="docs-bg-lighter">
+                The vertical alignment of the header text. 
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            HAlign
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum {Left, Center, Right} 
+            <div class="docs-bg-lighter">
+                The horizontal alignment of the row data text. 
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            VAlien
+        </div>
+       <div class="docs-description" style="padding-left:20px;">
+            Not implemented yet
+            <div class="docs-bg-lighter">
+                The vertical alignment of the row data text. 
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            BackGroundColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                The background color of the row cells.
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            HeaderBackgroundColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                The background color of the header cell.
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            AlternateBackgroundColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                The background color of the alternate row cell.
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            Border
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+           PFW_Border
+            <div class="docs-bg-lighter">
+                The border of the rows cells
+            </div>
+        </div>
+        <div class="text-decoration-underline docs-property">
+            HeaderBorder
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+           PFW_Border
+            <div class="docs-bg-lighter">
+                The border of the header cell.
+            </div>
+        </div>
+    </div>
+
+    <p></p>
+    <h3 class="docs-title" name="border" @id="border" id="border">Section 8: Table {PFW_Table}</h3>
+    <div class="docs-bg-light" style="padding-left:24px;">
+       <div class="docs-desc-title">
+            This is the main drawable object for tables and grids.
+        </div>
+        
+        <div class="text-decoration-underline docs-property">
+            Columns
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Collection&lt;PFW_TableColumn&gt;
+            <div class="docs-bg-lighter">
+                A collection of columns for this table.
+            </div>
+        </div>
+
+         <div class="text-decoration-underline docs-property">
+            RowHeaderHeight
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Float
+            <div class="docs-bg-lighter">
+                Sets the column's header cell height.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            RowHeight
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Float
+            <div class="docs-bg-lighter">
+                Sets the column's data cells height
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Bounds
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            RectangleF
+            <div class="docs-bg-lighter">
+                The boundaries of the table.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            BoundsUnit
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Enum {Percent, Dot (Currently represented as Millimeter)}
+            <div class="docs-bg-lighter">
+                The measurement unit of the table's bounds.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            BackgroundColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                Sets the background color of the data rows, this will be overridden by the column's background color property if set.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            HeaderBackgroundColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Color
+            <div class="docs-bg-lighter">
+                Sets the background color of the header rows, this will be overridden by the column's header background color property if set.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            AlternateBackgroundColor
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+             Color
+            <div class="docs-bg-lighter">
+                Sets the background color of the alternate rows, this will be overridden by the column's alternate background color property if set.
+            </div>
+        </div>
+
+        <div class="text-decoration-underline docs-property">
+            Data
+        </div>
+        <div class="docs-description" style="padding-left:20px;">
+            Collection 
+            <div class="docs-bg-lighter">
+                An array or collection of objects define the data to be displayed on the table, the generic data type of this collection is the class that will be turned into columns. 
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 @code {
 }
