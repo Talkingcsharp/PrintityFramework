@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Magick.NET.Core" Version="8.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
