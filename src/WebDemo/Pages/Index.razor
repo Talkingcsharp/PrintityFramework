@@ -61,8 +61,8 @@
     {
         DocumentService service = new DocumentService();
         var documentOutput = service.CreateSampleDocument(list);
-
-        var cacheKey = _cache.CreateNewCachedItem(documentOutput);
+        
+        var cacheKey = _cache.CreateNewCachedItem(new MemoryStream(documentOutput));
         _navigator.NavigateTo($"/pdf/show/{cacheKey}", true);
     }
 

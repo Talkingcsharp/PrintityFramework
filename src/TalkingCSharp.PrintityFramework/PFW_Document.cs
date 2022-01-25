@@ -65,7 +65,7 @@ public class PFW_Document
         };
     }
 
-    public Stream CreateDocument()
+    public byte[] CreateDocument()
     {
         PdfDocument document = new PdfDocument();
         var page = document.AddPage();
@@ -78,7 +78,7 @@ public class PFW_Document
         
         MemoryStream ms = new MemoryStream();
         document.Save(ms, true);
-        return ms;
+        return ms.ToArray();
     }
     public void CreateDocument(string fileName)
     {

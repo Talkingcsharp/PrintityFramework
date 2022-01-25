@@ -8,7 +8,7 @@ namespace WebDemo.Documents
 {
     public class DocumentService
     {
-        public MemoryStream CreateSampleDocument(List<SamplePrintityTableModel> tableData)
+        public byte[] CreateSampleDocument(List<SamplePrintityTableModel> tableData)
         {
             var document = new PFW_Document();
             document
@@ -44,7 +44,7 @@ namespace WebDemo.Documents
                     .SetBounds(new RectangleF(10,20,80,75), PFW_MeasurementsEnum.Percent)
                     .SetData(tableData));
 
-            var stream = document.CreateDocument() as MemoryStream;
+            var stream = document.CreateDocument();
             if(stream is null)
             {
                 throw new Exception("Cannot create document");

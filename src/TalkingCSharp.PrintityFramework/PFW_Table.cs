@@ -4,6 +4,7 @@ using PrintityFramework.Shared;
 using PrintityFramework.Shared.Core;
 using System.Collections;
 using System.Drawing;
+using System.Text.Json;
 
 namespace PrintityFramework;
 
@@ -123,6 +124,28 @@ public static class PFW_TableExtensions
 {
     public static string GetStringValue(this object source, PFW_TableColumn column)
     {
+        if(source is JsonElement)
+        {
+            JsonElement element = (JsonElement)source;
+            JsonElement property;
+            if (element.TryGetProperty(column.PropertyName, out property))
+            {
+                if (property.ValueKind == JsonValueKind.Number)
+                {
+                    return property.GetDouble().ToString();
+                }
+                else if (property.ValueKind == JsonValueKind.String)
+                {
+                    return property.GetString() ?? "";
+                }
+                else
+                {
+                    return property.GetRawText();
+                }
+                
+                
+            }
+        }
         var propInfo = source.GetType().GetProperties().Where(p => p.Name == column.PropertyName).FirstOrDefault();
         if (propInfo is null)
         {

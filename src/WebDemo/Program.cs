@@ -20,10 +20,12 @@ builder.Services.AddSwaggerGen(w =>
         Title = "Swagger docs",
         Version = "V1"
     });
+    w.UseInlineDefinitionsForEnums();
 });
 builder.Services.AddControllers().AddJsonOptions(opt =>
 {
     opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(allowIntegerValues: true));
 });
 var app = builder.Build();
 
