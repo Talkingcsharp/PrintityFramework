@@ -24,7 +24,6 @@ namespace PrintityFramework.UnitTest
                 var ms = image.AsJpeg();
                 Assert.NotNull(ms);
             }
-
         }
         [Fact]
         public void Test1()
