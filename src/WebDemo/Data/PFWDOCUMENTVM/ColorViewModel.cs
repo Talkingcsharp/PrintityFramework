@@ -6,9 +6,9 @@ namespace WebDemo.Data.PFWDOCUMENTVM
     public class ColorViewModel
     {
         [DefaultValue("White")]
-        public string ColorName { get; set; } = "White";
+        public string? ColorName { get; set; } = "White";
         [DefaultValue("#FFF")]
-        public string ColorHex { get; set; } = "#FFF";
+        public string? ColorHex { get; set; } = "#FFF";
         [DefaultValue(255)]
         public int ColorR { get; set; } = 255;
         [DefaultValue(255)]

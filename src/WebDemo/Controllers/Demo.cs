@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PrintityFramework;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebDemo.Data.PFWDOCUMENTVM;
 
 namespace WebDemo.Controllers
@@ -12,10 +10,9 @@ namespace WebDemo.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] PFW_DocumentViewModel input)
         {
-            var output = input.ToDocument().CreateDocument();
-            
-                return File(output, "application/pdf", "document.pdf");
-            
+            var document = input.ToDocument();
+            var output = document.CreateDocument();
+            return File(output, "application/pdf", "document.pdf");
         }
     }
 }

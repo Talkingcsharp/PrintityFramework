@@ -74,6 +74,34 @@ namespace WebDemo.Data.PFWDOCUMENTVM
                 }
                 output.AddTable(table);
             }
+            foreach(var item in Labels)
+            {
+                output.Labels.Add(new PFW_PlaceLabel()
+                    .SetBounds(item.Bounds,item.BoundsUnit)
+                    .SetBackgroundColor(item.BackgroundColor.Export())
+                    .SetBorder(item.Border.Export())
+                    .SetFont(item.Font.Export())
+                    .SetHAlign(item.HAlign)
+                    .SetText(item.Text));
+            }
+            foreach(var item in PlaceHeaderValues)
+            {
+                output.PlaceHeaderValues.Add(new PFW_PlaceHeaderValue()
+                    .SetBackgroundColor(item.BackGroundColor.Export())
+                    .SetBorder(item.Border.Export())
+                    .SetBounds(item.Bounds,item.BoundsUnit)
+                    .SetFont(item.Font.Export())
+                    .SetHAlign(item.HAlign)
+                    .SetHeader(item.Header)
+                    .SetHeaderBackgroundColor(item.HeaderBackgroundColor.Export())
+                    .SetHeaderBorder(item.HeaderBorder.Export())
+                    .SetHeaderBounds(item.HeaderBounds,item.HeaderBoundsUnit)
+                    .SetHeaderFont(item.HeaderFont.Export())
+                    .SetHeaderHAlign(item.HeaderHAlign)
+                    .SetHeaderVAlign(item.HeaderVAlien)
+                    .SetText(item.Text)
+                    .SetVAlign(item.VAlien));
+            }
             return output;
         }
 
