@@ -9,10 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Magick.NET.Core" Version="8.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TalkingCSharp.PrintityFramework\PrintityFramework.csproj" />
+    <PackageReference Include="TalkingCSharp.PrintityFramework" Version="0.0.2" />
   </ItemGroup>
 
 </Project>
