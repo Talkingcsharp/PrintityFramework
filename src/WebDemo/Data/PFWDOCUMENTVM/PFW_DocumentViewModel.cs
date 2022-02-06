@@ -1,8 +1,6 @@
 ﻿using PrintityFramework;
 using PrintityFramework.Shared;
 using System.Drawing;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace WebDemo.Data.PFWDOCUMENTVM
 {
@@ -42,7 +40,7 @@ namespace WebDemo.Data.PFWDOCUMENTVM
         {
             var output = new PFW_Document();
             output.PaperSize = PaperSize;
-            foreach(var item in Tables)
+            foreach (var item in Tables)
             {
                 var table = new PFW_Table<dynamic>()
                     .SetAlternateBackgroundColor(item.AlternateBackgroundColor.Export())
@@ -53,7 +51,7 @@ namespace WebDemo.Data.PFWDOCUMENTVM
                     .SetRowHeaderHeight(item.RowHeaderHeight)
                     .SetRowHeight(item.RowHeight);
 
-                foreach(var column in item.Columns)
+                foreach (var column in item.Columns)
                 {
                     table.AddColumn(new PFW_TableColumn()
                         .SetAlternateBackgroundColor(column.AlternateBackgroundColor.Export())
@@ -70,32 +68,32 @@ namespace WebDemo.Data.PFWDOCUMENTVM
                         .SetHeaderVAlign(column.HeaderVAlien)
                         .SetPropertyName(column.PropertyName)
                         .SetVAlign(column.VAlien)
-                        .SetWidth(column.Width,column.WidthUnit));
+                        .SetWidth(column.Width, column.WidthUnit));
                 }
                 output.AddTable(table);
             }
-            foreach(var item in Labels)
+            foreach (var item in Labels)
             {
                 output.Labels.Add(new PFW_PlaceLabel()
-                    .SetBounds(item.Bounds,item.BoundsUnit)
+                    .SetBounds(item.Bounds, item.BoundsUnit)
                     .SetBackgroundColor(item.BackgroundColor.Export())
                     .SetBorder(item.Border.Export())
                     .SetFont(item.Font.Export())
                     .SetHAlign(item.HAlign)
                     .SetText(item.Text));
             }
-            foreach(var item in PlaceHeaderValues)
+            foreach (var item in PlaceHeaderValues)
             {
                 output.PlaceHeaderValues.Add(new PFW_PlaceHeaderValue()
                     .SetBackgroundColor(item.BackGroundColor.Export())
                     .SetBorder(item.Border.Export())
-                    .SetBounds(item.Bounds,item.BoundsUnit)
+                    .SetBounds(item.Bounds, item.BoundsUnit)
                     .SetFont(item.Font.Export())
                     .SetHAlign(item.HAlign)
                     .SetHeader(item.Header)
                     .SetHeaderBackgroundColor(item.HeaderBackgroundColor.Export())
                     .SetHeaderBorder(item.HeaderBorder.Export())
-                    .SetHeaderBounds(item.HeaderBounds,item.HeaderBoundsUnit)
+                    .SetHeaderBounds(item.HeaderBounds, item.HeaderBoundsUnit)
                     .SetHeaderFont(item.HeaderFont.Export())
                     .SetHeaderHAlign(item.HeaderHAlign)
                     .SetHeaderVAlign(item.HeaderVAlien)

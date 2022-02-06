@@ -1,5 +1,4 @@
 using PdfSharpCore.Drawing;
-using PdfSharpCore.Pdf;
 using PrintityFramework.Shared;
 using System;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace PrintityFramework.UnitTest
                 var ms = image.AsJpeg();
                 Assert.NotNull(ms);
             }
-            
+
         }
         [Fact]
         public void Test1()
@@ -125,13 +124,6 @@ namespace PrintityFramework.UnitTest
                     .SetHeader("HEADER")
                     .SetBounds(new RectangleF(50, 90, 40, 5), PFW_MeasurementsEnum.Percent)
                     .SetHeaderBounds(new RectangleF(50, 85, 40, 5), PFW_MeasurementsEnum.Percent));
-            //doc.CreateDocument("myfile.pdf");
-            //Assert.True(File.Exists("myfile.pdf"));
-            //var output = doc.CreateDocumentAsImages();
-            //for(int i =1;i<= output.Count; i++)
-            //{
-            //    File.WriteAllBytes($"{i}.jpg", output[i].ToArray());
-            //}
         }
 
         List<Student> PrepareList()

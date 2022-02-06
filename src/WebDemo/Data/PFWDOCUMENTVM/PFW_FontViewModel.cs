@@ -1,6 +1,5 @@
 ﻿using PrintityFramework;
 using System.ComponentModel;
-using System.Drawing;
 
 namespace WebDemo.Data.PFWDOCUMENTVM
 {
@@ -39,7 +38,6 @@ namespace WebDemo.Data.PFWDOCUMENTVM
                 .SetItalic(Italic)
                 .SetSize(Size)
                 .SetUderline(Underline);
-            
         }
     }
 }

@@ -26,6 +26,5 @@ namespace WebDemo.Data.PFWDOCUMENTVM
         public ColorViewModel AlternateBackgroundColor { get; set; } = ColorViewModel.FromColor(PFW_Defaults.DefaultAlternatingBackgroundColor);
         public PFW_BorderViewModel Border { get; set; }
         public PFW_BorderViewModel HeaderBorder { get; set; }
-
     }
 }

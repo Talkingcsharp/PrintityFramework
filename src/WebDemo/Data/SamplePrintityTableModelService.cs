@@ -6,7 +6,7 @@
         {
             List<SamplePrintityTableModel> output = new List<SamplePrintityTableModel>();
             Random rand = new Random();
-            for(int i =1;i<= recordsCount; i++)
+            for (int i = 1; i <= recordsCount; i++)
             {
                 output.Add(new SamplePrintityTableModel
                 {
