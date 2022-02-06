@@ -51,5 +51,8 @@ namespace PrintityFramework.Shared.Core
         public static PFW_Border DefaultBorder = new PFW_Border()
             .SetBorderColor(DefaultBorderColor)
             .SetBorderSize(DefaultBorderSize);
+
+        public static float DefaultTableRowHeight = 8;
+        public static float DefaultTableRowHeaderHeight = 10;
     }
 }

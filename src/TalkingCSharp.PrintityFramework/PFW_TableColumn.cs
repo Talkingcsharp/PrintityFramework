@@ -63,7 +63,7 @@ public class PFW_TableColumn : IPFW_DrawableColumn
         return this;
     }
 
-    public PFW_TableColumn SetWidth(int width, PFW_MeasurementsEnum unit)
+    public PFW_TableColumn SetWidth(float width, PFW_MeasurementsEnum unit)
     {
         this.Width = width;
         this.WidthUnit = unit;

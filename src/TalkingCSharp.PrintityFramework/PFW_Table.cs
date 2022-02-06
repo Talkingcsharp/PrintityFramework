@@ -4,14 +4,15 @@ using PrintityFramework.Shared;
 using PrintityFramework.Shared.Core;
 using System.Collections;
 using System.Drawing;
+using System.Text.Json;
 
 namespace PrintityFramework;
 
-public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable
+public class PFW_Table<DataType> : IPFW_BoundsObject, IPFW_DrawableTable where DataType : class
 {
     public ICollection<PFW_TableColumn> Columns { get; set; } = new List<PFW_TableColumn>();
-    public float RowHeaderHeight { get; set; } = 50;
-    public float RowHeight { get; set; } = 40;
+    public float RowHeaderHeight { get; set; } = PFW_Defaults.DefaultTableRowHeaderHeight;
+    public float RowHeight { get; set; } = PFW_Defaults.DefaultTableRowHeight;
     public RectangleF Bounds { get; set; }
     public PFW_MeasurementsEnum BoundsUnit { get; set; }
     public Color BackgroundColor { get; set; } = PFW_Defaults.DefaultBackgroundColor;
@@ -123,6 +124,28 @@ public static class PFW_TableExtensions
 {
     public static string GetStringValue(this object source, PFW_TableColumn column)
     {
+        if(source is JsonElement)
+        {
+            JsonElement element = (JsonElement)source;
+            JsonElement property;
+            if (element.TryGetProperty(column.PropertyName, out property))
+            {
+                if (property.ValueKind == JsonValueKind.Number)
+                {
+                    return property.GetDouble().ToString();
+                }
+                else if (property.ValueKind == JsonValueKind.String)
+                {
+                    return property.GetString() ?? "";
+                }
+                else
+                {
+                    return property.GetRawText();
+                }
+                
+                
+            }
+        }
         var propInfo = source.GetType().GetProperties().Where(p => p.Name == column.PropertyName).FirstOrDefault();
         if (propInfo is null)
         {
