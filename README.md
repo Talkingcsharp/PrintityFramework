@@ -15,7 +15,7 @@ This framework depends on
 # API demo
 - Call HTTPPOST to this API: https://printity.azurewebsites.net/api/Demo
 - Abd here is a JSON example for the demo
-...json
+```json
 {
     "paperSize": "A4",
     "tables": [
@@ -562,7 +562,7 @@ This framework depends on
       }
     ]
   }
-...
+  ```
 # project URL
 Project URL is where to find the already implemented features and the in-progress ones and the future of this library
 - This library's project URL is here: https://github.com/users/Talkingcsharp/projects/4
