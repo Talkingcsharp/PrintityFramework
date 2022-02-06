@@ -44,12 +44,15 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.MapControllers();
-app.MapSwagger();
-app.UseSwagger();
-app.UseSwaggerUI(ui =>
+if (app.Environment.IsDevelopment())
 {
-    ui.SwaggerEndpoint("V1/swagger.json", "Swagger docs");
-});
+    app.MapSwagger();
+    app.UseSwagger();
+    app.UseSwaggerUI(ui =>
+    {
+        ui.SwaggerEndpoint("V1/swagger.json", "Swagger docs");
+    });
+}
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
