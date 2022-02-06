@@ -563,6 +563,117 @@ This framework depends on
     ]
   }
   ```
+
+# .Net example
+```csharp
+        public class Data
+        {
+            public int Index { get; set; }
+            public bool? Bool { get; set; }
+            public string String { get; set; }
+        }
+
+        public void CreateDocument()
+        {
+            var data = new List<Data>
+            {
+                new Data{ Index = 1, Bool = true, String = "First line" },
+                new Data{ Index = 2, Bool = false, String = "Second line" },
+                new Data{ Index = 3, String = "Third line" },
+                new Data{ Index = 4, Bool = true, String = "Fourth line" },
+                new Data{ Index = 5, Bool = false, String = "Fifth line" },
+                new Data{ Index = 6, String = "Sixth line" },
+            };
+
+            var document = new PFW_Document()
+                .AddTable(new PFW_Table<Data>()
+                    .SetAlternateBackgroundColor(ColorTranslator.FromHtml("#888"))
+                    .SetBackgroundColor(Color.White)
+                    .SetBounds(new RectangleF { X = 2, Y = 10, Width = 96, Height = 30 }, PFW_MeasurementsEnum.Percent)
+                    .SetData(data)
+                    .SetHeaderBackgroundColor(Color.White)
+                    .SetRowHeaderHeight(10)
+                    .SetRowHeight(8)
+                    .AddColumn(new PFW_TableColumn()
+                        .SetBorder(new PFW_Border()
+                            .SetBorderColor(Color.Black)
+                            .SetBorderSize(1))
+                        .SetHAlign(PFW_HorizontalAlignment.Center)
+                        .SetHeaderBorder(new PFW_Border()
+                            .SetBorderSize(1)
+                            .SetBottomBorderColor(Color.Black))
+                        .SetHeaderHAlign(PFW_HorizontalAlignment.Center)
+                        .SetHeaderText("#")
+                        .SetPropertyName("Index")
+                        .SetWidth(25, PFW_MeasurementsEnum.Percent))
+                    .AddColumn(new PFW_TableColumn()
+                        .SetBorder(new PFW_Border()
+                            .SetBorderColor(Color.Black)
+                            .SetBorderSize(1))
+                        .SetHAlign(PFW_HorizontalAlignment.Center)
+                        .SetHeaderBorder(new PFW_Border()
+                            .SetBorderSize(1)
+                            .SetBottomBorderColor(Color.Black))
+                        .SetHeaderHAlign(PFW_HorizontalAlignment.Center)
+                        .SetHeaderText("Boolean")
+                        .SetPropertyName("Bool")
+                        .SetWidth(25, PFW_MeasurementsEnum.Percent))
+                    .AddColumn(new PFW_TableColumn()
+                        .SetBorder(new PFW_Border()
+                            .SetBorderColor(Color.Black)
+                            .SetBorderSize(1))
+                        .SetHAlign(PFW_HorizontalAlignment.Center)
+                        .SetHeaderBorder(new PFW_Border()
+                            .SetBorderSize(1)
+                            .SetBottomBorderColor(Color.Black))
+                        .SetHeaderHAlign(PFW_HorizontalAlignment.Center)
+                        .SetHeaderText("String")
+                        .SetPropertyName("String")
+                        .SetWidth(50, PFW_MeasurementsEnum.Percent))
+                    )
+                .AddLabel(new PFW_PlaceLabel()
+                    .SetHAlign(PFW_HorizontalAlignment.Center)
+                    .SetBorder(new PFW_Border()
+                        .SetBorderSize(0)
+                        .SetBottomBorderColor(Color.Black)
+                        .SetBottomBorderSize(1))
+                    .SetBounds(new RectangleF(20, 5, 60, 3), PFW_MeasurementsEnum.Percent)
+                    .SetFont(new PFW_Font()
+                        .SetFontName("Arial")
+                        .SetSize(12)
+                        .SetColor(Color.Black)
+                        .SetBold(true))
+                    .SetHAlign(PFW_HorizontalAlignment.Center)
+                    .SetText("Printity framework test document")
+                    .SetBackgroundColor(ColorTranslator.FromHtml("#CCC")))
+                .AddLabel(new PFW_PlaceLabel()
+                    .SetHAlign(PFW_HorizontalAlignment.Center)
+                    .SetBorder(new PFW_Border()
+                        .SetBorderColor(Color.Red)
+                        .SetBorderSize(1))
+                    .SetBounds(new RectangleF(5, 95, 90, 2.5f), PFW_MeasurementsEnum.Percent)
+                    .SetFont(new PFW_Font()
+                        .SetSize(8)
+                        .SetColor(Color.DarkRed))
+                    .SetText("This test document was created using printity framework"))
+                .AddHeaderValue(new PFW_PlaceHeaderValue()
+                    .SetBorder(new PFW_Border()
+                        .SetBorderColor(Color.Black)
+                        .SetBorderSize(1))
+                    .SetBounds(new RectangleF(40, 88, 20, 3), PFW_MeasurementsEnum.Percent)
+                    .SetHAlign(PFW_HorizontalAlignment.Center)
+                    .SetHeader("Total records")
+                    .SetHeaderBorder(new PFW_Border()
+                        .SetBorderColor(Color.Black)
+                        .SetBorderSize(1))
+                    .SetHeaderBounds(new RectangleF(20, 88, 20, 3), PFW_MeasurementsEnum.Percent)
+                    .SetHeaderFont(PFW_Defaults.DefaultHeaderFont)
+                    .SetHeaderHAlign(PFW_HorizontalAlignment.Center)
+                    .SetText("6 records"));
+
+            document.CreateDocument("file.pdf");
+        }
+```
 # project URL
 Project URL is where to find the already implemented features and the in-progress ones and the future of this library
 - This library's project URL is here: https://github.com/users/Talkingcsharp/projects/4

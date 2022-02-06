@@ -10,7 +10,7 @@ namespace PrintityFramework.Shared.Core
     public class PFW_Defaults
     {
         public static Color DefaultColor = Color.Black;
-        public static Color DefaultAlternateColor = Color.Gray;
+        public static Color DefaultAlternateColor = Color.Black;
         public static Color DefaultHeaderColor = Color.Black;
         public static Color DefaultBackgroundColor = Color.Transparent;
         public static Color DefaultAlternatingBackgroundColor = Color.LightGray;
