@@ -4,6 +4,18 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>TalkingCSharp.$(AssemblyName)</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>TalkingCSharp</Authors>
+    <Description>Printity framework is an open-source free to use library for creating PDF printable version of your data using objects and APIs to generate automated printable pages.</Description>
+    <Copyright>This is an open source project currently all copyrights a reserved to TalkcingCSharp</Copyright>
+    <PackageProjectUrl>https://github.com/Talkingcsharp/PrintityFramework</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Talkingcsharp/PrintityFramework</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>open source; free; print; drawing; pdf; ASP; .net; printing;</PackageTags>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
